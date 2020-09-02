@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -41,6 +41,8 @@
                     <input type="date" class="form-control" id="departureDate" name="departureDate" required>
                 </div>
             </div>
+
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
