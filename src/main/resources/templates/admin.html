@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -18,6 +19,7 @@
             <th scope="col">Last Name</th>
             <th scope="col">Arrival Date</th>
             <th scope="col">Departure Date</th>
+            <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -26,9 +28,31 @@
             <td th:text="${booking.lastName}"></td>
             <td th:text="${booking.arrivalDate}"></td>
             <td th:text="${booking.departureDate}"></td>
+            <td><button type="button" class="btn btn-danger" data-th-data-id="${booking.id}">Delete</button></td>
         </tr>
         </tbody>
     </table>
 </div>
+<script>
+    (() => {
+    	const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+    	document.querySelector('table').addEventListener('click', (e) => {
+    		if (e.target.type === 'button') {
+                const id = e.target.getAttribute('data-id')
+                fetch(`/admin/bookings/${id}`, {
+                	method: 'DELETE',
+                    headers: {
+                		'X-CSRF-TOKEN': csrfToken,
+                    }
+                }).then(() => {
+                	location.reload()
+                }).catch(e => {
+                	console.error(e)
+                });
+            }
+        })
+    })()
+</script>
+
 </body>
 </html>

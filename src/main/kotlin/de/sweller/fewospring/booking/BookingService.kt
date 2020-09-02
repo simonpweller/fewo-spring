@@ -1,6 +1,7 @@
 package de.sweller.fewospring.booking
 
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.mail.SimpleMailMessage
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.stereotype.Service
@@ -28,5 +29,14 @@ class BookingService(
         message.setSubject("Confirmation mail")
         message.setText("Your booking is hereby confirmed!")
         mailSender.send(message)
+    }
+
+    fun delete(id: Long): Boolean {
+        return try {
+            bookingRepository.deleteById(id)
+            true
+        } catch (e: EmptyResultDataAccessException) {
+            false
+        }
     }
 }
