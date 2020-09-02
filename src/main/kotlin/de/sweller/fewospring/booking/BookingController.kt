@@ -1,0 +1,29 @@
+package de.sweller.fewospring.booking
+
+import org.springframework.stereotype.Controller
+import org.springframework.ui.Model
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestMapping
+
+@Controller
+@RequestMapping
+class BookingController(
+        val bookingRepository: BookingRepository,
+) {
+
+    @GetMapping("/")
+    fun getBookingForm() = "booking-form"
+
+    @GetMapping("/bookings")
+    fun getBookings(model: Model): String {
+        model.addAttribute("bookings", bookingRepository.findAll())
+        return "bookings"
+    }
+
+    @PostMapping("/bookings")
+    fun createBooking(bookingData: BookingData): String {
+        bookingRepository.save(bookingData.toBooking())
+        return "redirect:/bookings"
+    }
+}
