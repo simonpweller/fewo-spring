@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 @RequestMapping
 class BookingController(
-        val bookingRepository: BookingRepository,
+        val bookingService: BookingService,
 ) {
 
     @GetMapping("/")
@@ -17,13 +17,13 @@ class BookingController(
 
     @GetMapping("/bookings")
     fun getBookings(model: Model): String {
-        model.addAttribute("bookings", bookingRepository.findAll())
+        model.addAttribute("bookings", bookingService.getBookings())
         return "bookings"
     }
 
     @PostMapping("/bookings")
     fun createBooking(bookingData: BookingData): String {
-        bookingRepository.save(bookingData.toBooking())
+        bookingService.addBooking(bookingData)
         return "redirect:/bookings"
     }
 }

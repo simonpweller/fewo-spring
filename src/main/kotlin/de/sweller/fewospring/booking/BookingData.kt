@@ -8,6 +8,7 @@ const val DATE_INPUT_FORMAT = "yyyy-MM-dd"
 data class BookingData(
         val firstName: String,
         val lastName: String,
+        val email: String,
         @DateTimeFormat(pattern = DATE_INPUT_FORMAT)
         val arrivalDate: LocalDate,
         @DateTimeFormat(pattern = DATE_INPUT_FORMAT)
@@ -16,6 +17,7 @@ data class BookingData(
     fun toBooking() = Booking(
             firstName = this.firstName,
             lastName = this.lastName,
+            email = this.email,
             arrivalDate = this.arrivalDate,
             departureDate = this.departureDate,
     )

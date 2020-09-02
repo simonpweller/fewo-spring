@@ -12,6 +12,7 @@ interface BookingRepository: CrudRepository<Booking, Long>
 class Booking(
         var firstName: String,
         var lastName: String,
+        var email: String,
         var arrivalDate: LocalDate,
         var departureDate: LocalDate,
         @Id @GeneratedValue var id: Long? = null,
