@@ -5,46 +5,46 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Booking</title>
+    <title th:text="#{bookingForm.title}"></title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 <body>
     <div class="container">
-        <h1 th:text="#{bookingform.heading}"></h1>
+        <h1 th:text="#{bookingForm.heading}"></h1>
         <form action="/bookings" method="post">
             <div class="row">
                 <div class="form-group col-sm-6">
-                    <label for="firstName">First Name</label>
+                    <label for="firstName" th:text="#{bookingForm.firstName}"></label>
                     <input type="text" class="form-control" id="firstName" name="firstName" required>
                 </div>
 
                 <div class="form-group col-sm-6">
-                    <label for="lastName">Last Name</label>
+                    <label for="lastName" th:text="#{bookingForm.lastName}"></label>
                     <input type="text" class="form-control" id="lastName" name="lastName" required>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email" th:text="#{bookingForm.email}"></label>
                 <input type="email" class="form-control" id="email" name="email" required>
             </div>
 
             <div class="row">
                 <div class="form-group col-sm-6">
-                    <label for="arrivalDate">Arrival Date</label>
+                    <label for="arrivalDate" th:text="#{bookingForm.arrivalDate}"></label>
                     <input type="date" class="form-control" id="arrivalDate" name="arrivalDate" required>
                 </div>
 
                 <div class="form-group col-sm-6">
-                    <label for="departureDate">Departure Date</label>
+                    <label for="departureDate" th:text="#{bookingForm.departureDate}"></label>
                     <input type="date" class="form-control" id="departureDate" name="departureDate" required>
                 </div>
             </div>
 
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" th:text="#{bookingForm.submit}"></button>
         </form>
     </div>
 </body>
