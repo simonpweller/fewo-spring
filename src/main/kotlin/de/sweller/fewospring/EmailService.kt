@@ -3,8 +3,8 @@ package de.sweller.fewospring
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.MessageSource
 import org.springframework.context.i18n.LocaleContextHolder
-import org.springframework.mail.SimpleMailMessage
 import org.springframework.mail.javamail.JavaMailSender
+import org.springframework.mail.javamail.MimeMessageHelper
 import org.springframework.stereotype.Service
 
 @Service
@@ -17,13 +17,24 @@ class EmailService(
     lateinit var fromAddress: String
 
     fun sendConfirmationMail(toAddress: String) {
-        val message = SimpleMailMessage()
         val locale = LocaleContextHolder.getLocale()
-        message.setFrom(fromAddress)
-        message.setTo(toAddress)
-        message.setSubject(messageSource.getMessage("confirmationMail.subject", null, locale))
-        message.setText(messageSource.getMessage("confirmationMail.text", null, locale))
-        mailSender.send(message)
+        sendHtmlMessage(
+                to = toAddress,
+                from = fromAddress,
+                subject = messageSource.getMessage("confirmationMail.subject", null, locale),
+                htmlBody = messageSource.getMessage("confirmationMail.text", null, locale)
+        )
+    }
+
+    private fun sendHtmlMessage(to: String, from: String, subject: String, htmlBody: String) {
+        val mimeMessage = mailSender.createMimeMessage()
+        MimeMessageHelper(mimeMessage, true, "UTF-8").apply {
+            setTo(to)
+            setFrom(from)
+            setSubject(subject)
+            setText(htmlBody)
+        }
+        mailSender.send(mimeMessage)
     }
 
 }
