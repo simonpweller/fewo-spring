@@ -1,4 +1,4 @@
-package de.sweller.fewospring
+package de.sweller.fewospring.email
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.MessageSource
@@ -32,7 +32,7 @@ class EmailService(
             setTo(to)
             setFrom(from)
             setSubject(subject)
-            setText(htmlBody)
+            setText(htmlBody, true)
         }
         mailSender.send(mimeMessage)
     }

@@ -1,4 +1,4 @@
-package de.sweller.fewospring
+package de.sweller.fewospring.admin
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

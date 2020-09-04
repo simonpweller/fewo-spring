@@ -1,6 +1,6 @@
 package de.sweller.fewospring.booking
 
-import de.sweller.fewospring.EmailService
+import de.sweller.fewospring.email.EmailService
 import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.stereotype.Service
 
