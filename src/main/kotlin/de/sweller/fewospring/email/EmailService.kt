@@ -23,24 +23,23 @@ class EmailService(
         val locale = LocaleContextHolder.getLocale()
         sendTemplatedMessage(
                 to = toAddress,
-                from = fromAddress,
                 subject = messageSource.getMessage("confirmationMail.subject", null, locale),
                 template = "mail/booking-confirmation",
         )
     }
 
-    private fun sendTemplatedMessage(to: String, from: String, subject: String, template: String, templateModel: Map<String, Any>? = emptyMap()) {
+    private fun sendTemplatedMessage(to: String, subject: String, template: String, templateModel: Map<String, Any>? = emptyMap()) {
         val locale = LocaleContextHolder.getLocale()
         val context = Context(locale, templateModel)
         val htmlBody = emailTemplateEngine.process(template, context)
-        sendHtmlMessage(to, from, subject, htmlBody)
+        sendHtmlMessage(to, subject, htmlBody)
     }
 
-    private fun sendHtmlMessage(to: String, from: String, subject: String, htmlBody: String) {
+    private fun sendHtmlMessage(to: String, subject: String, htmlBody: String) {
         val mimeMessage = mailSender.createMimeMessage()
         MimeMessageHelper(mimeMessage, true, "UTF-8").apply {
+            setFrom(fromAddress)
             setTo(to)
-            setFrom(from)
             setSubject(subject)
             setText(htmlBody, true)
         }
