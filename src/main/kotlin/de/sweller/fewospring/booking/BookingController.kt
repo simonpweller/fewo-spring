@@ -13,6 +13,9 @@ class BookingController(
 ) {
 
     @GetMapping("/")
+    fun getHome() = "index"
+
+    @GetMapping("/booking-form")
     fun getBookingForm() = "booking-form"
 
     @GetMapping("/bookings")
