@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Navbar</title>
+</head>
+<body>
+<div class="navbar" th:fragment="navbar">
+    <div class="container">
+        <div class="innerWrapper">
+            <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/' ? ' link_active' : ''}"
+               href="/"
+               th:text="#{index.title}"
+            ></a>
+
+            <button class="toggle" th:attr="aria-label=#{navigationToggle}">
+                <span class="toggle-bar toggle-bar1"></span>
+                <span class="toggle-bar toggle-bar2"></span>
+                <span class="toggle-bar toggle-bar3"></span>
+            </button>
+
+            <nav>
+                <ul class="linkList navItems">
+                    <li>
+                        <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/availability' ? ' link_active' : ''}"
+                           href="/availability"
+                           th:text="#{availability}"
+                        ></a>
+                    </li>
+                    <li>
+                        <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/booking-form' ? ' link_active' : ''}"
+                           href="/booking-form"
+                           th:text="#{bookingForm}"
+                        ></a>
+                    </li>
+                    <li>
+                        <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/directions' ? ' link_active' : ''}"
+                           href="/directions"
+                           th:text="#{directions}"
+                        ></a>
+                    </li>
+                    <li>
+                        <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/apartment' ? ' link_active' : ''}"
+                           href="/apartment"
+                           th:text="#{apartment}"
+                        ></a>
+                    </li>
+                    <li>
+                        <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/bungalow' ? ' link_active' : ''}"
+                           href="/bungalow"
+                           th:text="#{bungalow}"
+                        ></a>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+    <script>
+        (() => {
+            let isExpanded = false;
+            const toggle = document.querySelector('.toggle');
+            const navItems = document.querySelector('.navItems');
+            toggle.addEventListener('click', () => {
+                isExpanded = !isExpanded;
+                toggle.toggleAttribute('aria-expanded', isExpanded);
+                toggle.classList.toggle('toggle_expanded', isExpanded);
+				navItems.classList.toggle('navItems_expanded', isExpanded)
+            });
+        })()
+    </script>
+</div>
+
+</body>
+</html>
