@@ -40,3 +40,45 @@ body {
     font-size: 300%;
     color: #eee;
 }
+
+.footer {
+    background-color: #1E412B;
+    color: #eee;
+    width: 100%;
+    display: flex;
+}
+
+.innerWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0 -10px;
+}
+
+@media only screen and (min-width : 768px) {
+    .innerWrapper {
+        flex-direction: row;
+    }
+}
+
+.linkList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+footer .linkList {
+    display: flex;
+}
+
+.link {
+    display: inline-block;
+    padding: 10px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.link_active {
+    font-weight: bold;
+}

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Footer</title>
+</head>
+<body>
+<footer class="footer" th:fragment="footer">
+    <div class="container">
+        <div class="innerWrapper">
+            <ul class="linkList">
+                <li>
+                    <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/imprint' ? ' link_active' : ''}"
+                       href="/imprint"
+                       th:text="#{imprint}"
+                    ></a>
+                </li>
+                <li>
+                    <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/privacy' ? ' link_active' : ''}"
+                       href="/privacy"
+                       th:text="#{privacy}"
+                    ></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
