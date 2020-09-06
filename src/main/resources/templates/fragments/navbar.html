@@ -57,6 +57,12 @@
                 </ul>
             </nav>
 
+            <a class="languageToggle" th:href="@{'' + '?lang=' + ${#locale.toString() == 'de' ? 'en' : 'de'}}"
+               th:attr="aria-label=#{languageToggle}"
+            >
+                <svg th:replace="${#locale.toString() == 'de'} ? ~{fragments/english :: english} : ~{fragments/german :: german}"></svg>
+            </a>
+
         </div>
     </div>
     <script>
@@ -64,11 +70,13 @@
             let isExpanded = false;
             const toggle = document.querySelector('.toggle');
             const navItems = document.querySelector('.navItems');
+            const languageToggle = document.querySelector('.languageToggle')
             toggle.addEventListener('click', () => {
                 isExpanded = !isExpanded;
                 toggle.toggleAttribute('aria-expanded', isExpanded);
                 toggle.classList.toggle('toggle_expanded', isExpanded);
 				navItems.classList.toggle('navItems_expanded', isExpanded)
+                languageToggle.classList.toggle('languageToggle_expanded');
             });
         })()
     </script>
