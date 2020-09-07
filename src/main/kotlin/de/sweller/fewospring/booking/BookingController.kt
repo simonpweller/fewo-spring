@@ -12,9 +12,6 @@ class BookingController(
         val bookingService: BookingService,
 ) {
 
-    @GetMapping("/")
-    fun getHome() = "index"
-
     @GetMapping("/booking-form")
     fun getBookingForm() = "booking-form"
 

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" th:lang="${#locale}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{images/favicon-32x32.png}"/>
+    <link rel="stylesheet" th:href="@{/index.css}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin=""/>
+    <title th:text="#{index.title}"></title>
+</head>
+<body>
+<div class="layout">
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <main>
+        <div class="container">
+            <div id="leaflet-container"></div>
+        </div>
+    </main>
+
+    <footer th:replace="fragments/footer :: footer"></footer>
+</div>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+<script th:inline="javascript">
+	(() => {
+		const map = L.map('leaflet-container').setView([50.9708, 13.4580], 14);
+		L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+			id: 'mapbox/streets-v11',
+			maxZoom: 18,
+			tileSize: 512,
+			zoomOffset: -1,
+			accessToken: /*[[${mapboxKey}]]*/ "",
+		}).addTo(map);
+		let markerOptions = {
+			iconUrl: '/images/leaflet/marker-icon.png',
+			iconRetinaUrl: '/images/leaflet/marker-icon-2x.png',
+			shadowUrl: '/images/leaflet/marker-shadow.png',
+			shadowRetinaUrl: '/images/leaflet/marker-shadow.png',
+		};
+		const apartment = L.marker([50.97108, 13.45563], markerOptions).addTo(map);
+		const bungalow = L.marker([50.97150, 13.45661], markerOptions).addTo(map);
+
+		const apartmentName = /*[[#{apartment}]]*/ "Apartment";
+		const bungalowName = /*[[#{bungalow}]]*/ "Bungalow";
+		const planRoute = /*[[#{planRoute}]]*/ "Plan route";
+
+		const apartmentPopup = `
+            ${apartmentName}
+            <br/>
+            <a href="https://www.google.com/maps/dir//Ferienwohnung+Bernd+Böhme,+Zum+Waldblick+42A,+09633+Halsbrücke+OT+Hetzdorf">
+              ${planRoute}
+            </a>
+        `;
+		const bungalowPopup = `
+            ${bungalowName}
+            <br/>
+            <a href="https://www.google.com/maps/dir//Ferienhaus+B%C3%B6hme+Gisela/@50.9711286,13.4552377,18">
+              ${planRoute}
+            </a>
+        `;
+		apartment.bindPopup(apartmentPopup);
+		bungalow.bindPopup(bungalowPopup);
+	})();
+</script>
+
+</body>
+</html>
