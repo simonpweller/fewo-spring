@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" type="image/png" sizes="32x32" th:href="@{images/favicon-32x32.png}" />
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{images/favicon-32x32.png}"/>
     <link rel="stylesheet" th:href="@{/index.css}">
     <title th:text="#{bungalow}"></title>
 </head>
@@ -41,6 +41,56 @@
                         <li th:text="#{apartment.pricing.children}"></li>
                         <li th:text="#{apartment.pricing.twoNights}"></li>
                     </ul>
+                </div>
+            </div>
+            <div class="gallery">
+                <div class="gallery-imageWrapper">
+                    <img class="gallery-image pops"
+                         th:src="@{/images/apartment/aussenansicht-600.jpg}"
+                         th:attr="srcset=@{/images/apartment/aussenansicht-600.jpg} + ' 600w, ' + @{/images/apartment/aussenansicht-400.jpg} + ' 400w'"
+                         sizes="(max-width: 676px) calc(100vw - 40px), (max-width: 996px) calc((100vw - 60px) / 2), 400px"
+                         th:alt="#{apartment.aussenansicht.alt}"
+                    />
+                </div>
+                <div class="gallery-imageWrapper">
+                    <img class="gallery-image pops"
+                         th:src="@{/images/apartment/kueche-600.jpg}"
+                         th:attr="srcset=@{/images/apartment/kueche-600.jpg} + ' 600w, ' + @{/images/apartment/kueche-400.jpg} + ' 400w'"
+                         sizes="(max-width: 676px) calc(100vw - 40px), (max-width: 996px) calc((100vw - 60px) / 2), 400px"
+                         th:alt="#{apartment.kueche.alt}"
+                    />
+                </div>
+                <div class="gallery-imageWrapper">
+                    <img class="gallery-image pops"
+                         th:src="@{/images/apartment/bad-600.jpg}"
+                         th:attr="srcset=@{/images/apartment/bad-600.jpg} + ' 600w, ' + @{/images/apartment/bad-400.jpg} + ' 400w'"
+                         sizes="(max-width: 676px) calc(100vw - 40px), (max-width: 996px) calc((100vw - 60px) / 2), 400px"
+                         th:alt="#{apartment.bad.alt}"
+                    />
+                </div>
+                <div class="gallery-imageWrapper">
+                    <img class="gallery-image pops"
+                         th:src="@{/images/apartment/schlafstube-600.jpg}"
+                         th:attr="srcset=@{/images/apartment/schlafstube-600.jpg} + ' 600w, ' + @{/images/apartment/schlafstube-400.jpg} + ' 400w'"
+                         sizes="(max-width: 676px) calc(100vw - 40px), (max-width: 996px) calc((100vw - 60px) / 2), 400px"
+                         th:alt="#{apartment.schlafstube.alt}"
+                    />
+                </div>
+                <div class="gallery-imageWrapper">
+                    <img class="gallery-image pops"
+                         th:src="@{/images/apartment/wohnstube-600.jpg}"
+                         th:attr="srcset=@{/images/apartment/wohnstube-600.jpg} + ' 600w, ' + @{/images/apartment/wohnstube-400.jpg} + ' 400w'"
+                         sizes="(max-width: 676px) calc(100vw - 40px), (max-width: 996px) calc((100vw - 60px) / 2), 400px"
+                         th:alt="#{apartment.wohnstube.alt}"
+                    />
+                </div>
+                <div class="gallery-imageWrapper">
+                    <img class="gallery-image pops"
+                         th:src="@{/images/apartment/esstisch-600.jpg}"
+                         th:attr="srcset=@{/images/apartment/esstisch-600.jpg} + ' 600w, ' + @{/images/apartment/esstisch-400.jpg} + ' 400w'"
+                         sizes="(max-width: 676px) calc(100vw - 40px), (max-width: 996px) calc((100vw - 60px) / 2), 400px"
+                         th:alt="#{apartment.esstisch.alt}"
+                    />
                 </div>
             </div>
         </div>

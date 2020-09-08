@@ -42,6 +42,56 @@
                     </ul>
                 </div>
             </div>
+            <div class="gallery">
+                <div class="gallery-imageWrapper">
+                    <img class="gallery-image pops"
+                         th:src="@{/images/bungalow/blick_vom_balkon-600.jpg}"
+                         th:attr="srcset=@{/images/bungalow/blick_vom_balkon-600.jpg} + ' 600w, ' + @{/images/bungalow/blick_vom_balkon-400.jpg} + ' 400w'"
+                         sizes="(max-width: 676px) calc(100vw - 40px), (max-width: 996px) calc((100vw - 60px) / 2), 400px"
+                         th:alt="#{bungalow.blick_vom_balkon.alt}"
+                    />
+                </div>
+                <div class="gallery-imageWrapper">
+                    <img class="gallery-image pops"
+                         th:src="@{/images/bungalow/kueche-600.jpg}"
+                         th:attr="srcset=@{/images/bungalow/kueche-600.jpg} + ' 600w, ' + @{/images/bungalow/kueche-400.jpg} + ' 400w'"
+                         sizes="(max-width: 676px) calc(100vw - 40px), (max-width: 996px) calc((100vw - 60px) / 2), 400px"
+                         th:alt="#{bungalow.kueche.alt}"
+                    />
+                </div>
+                <div class="gallery-imageWrapper">
+                    <img class="gallery-image pops"
+                         th:src="@{/images/bungalow/schlafstube_oben_doppelbett-600.jpg}"
+                         th:attr="srcset=@{/images/bungalow/schlafstube_oben_doppelbett-600.jpg} + ' 600w, ' + @{/images/bungalow/schlafstube_oben_doppelbett-400.jpg} + ' 400w'"
+                         sizes="(max-width: 676px) calc(100vw - 40px), (max-width: 996px) calc((100vw - 60px) / 2), 400px"
+                         th:alt="#{bungalow.schlafstube_oben_doppelbett.alt}"
+                    />
+                </div>
+                <div class="gallery-imageWrapper">
+                    <img class="gallery-image pops"
+                         th:src="@{/images/bungalow/terasse-600.jpg}"
+                         th:attr="srcset=@{/images/bungalow/terasse-600.jpg} + ' 600w, ' + @{/images/bungalow/terasse-400.jpg} + ' 400w'"
+                         sizes="(max-width: 676px) calc(100vw - 40px), (max-width: 996px) calc((100vw - 60px) / 2), 400px"
+                         th:alt="#{bungalow.terasse.alt}"
+                    />
+                </div>
+                <div class="gallery-imageWrapper">
+                    <img class="gallery-image pops"
+                         th:src="@{/images/bungalow/wohnstube_oben-600.jpg}"
+                         th:attr="srcset=@{/images/bungalow/wohnstube_oben-600.jpg} + ' 600w, ' + @{/images/bungalow/wohnstube_oben-400.jpg} + ' 400w'"
+                         sizes="(max-width: 676px) calc(100vw - 40px), (max-width: 996px) calc((100vw - 60px) / 2), 400px"
+                         th:alt="#{bungalow.wohnstube_oben.alt}"
+                    />
+                </div>
+                <div class="gallery-imageWrapper">
+                    <img class="gallery-image pops"
+                         th:src="@{/images/bungalow/wohnstube_oben_2-600.jpg}"
+                         th:attr="srcset=@{/images/bungalow/wohnstube_oben_2-600.jpg} + ' 600w, ' + @{/images/bungalow/wohnstube_oben_2-400.jpg} + ' 400w'"
+                         sizes="(max-width: 676px) calc(100vw - 40px), (max-width: 996px) calc((100vw - 60px) / 2), 400px"
+                         th:alt="#{bungalow.wohnstube_oben_2.alt}"
+                    />
+                </div>
+            </div>
         </div>
     </main>
 

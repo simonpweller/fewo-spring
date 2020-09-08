@@ -274,3 +274,20 @@ footer .linkList {
     flex: 1 1 0;
     padding: 0 10px;
 }
+
+.gallery {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.gallery-imageWrapper {
+    flex: auto;
+    width: 300px;
+    margin: 10px;
+}
+
+.gallery-image {
+    width: 100%;
+    height: auto;
+}
