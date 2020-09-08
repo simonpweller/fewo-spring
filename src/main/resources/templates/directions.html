@@ -38,14 +38,8 @@
 			zoomOffset: -1,
 			accessToken: /*[[${mapboxKey}]]*/ "",
 		}).addTo(map);
-		let markerOptions = {
-			iconUrl: '/images/leaflet/marker-icon.png',
-			iconRetinaUrl: '/images/leaflet/marker-icon-2x.png',
-			shadowUrl: '/images/leaflet/marker-shadow.png',
-			shadowRetinaUrl: '/images/leaflet/marker-shadow.png',
-		};
-		const apartment = L.marker([50.97108, 13.45563], markerOptions).addTo(map);
-		const bungalow = L.marker([50.97150, 13.45661], markerOptions).addTo(map);
+		const apartment = L.marker([50.97108, 13.45563]).addTo(map);
+		const bungalow = L.marker([50.97150, 13.45661]).addTo(map);
 
 		const apartmentName = /*[[#{apartment}]]*/ "Apartment";
 		const bungalowName = /*[[#{bungalow}]]*/ "Bungalow";
