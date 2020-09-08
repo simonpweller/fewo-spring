@@ -20,4 +20,10 @@ class PageController {
         return "directions"
     }
 
+    @GetMapping("/apartment")
+    fun getApartmentDetail() = "apartment"
+
+    @GetMapping("/bungalow")
+    fun getBungalowDetail() = "bungalow"
+
 }

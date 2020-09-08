@@ -259,3 +259,18 @@ footer .linkList {
 #leaflet-container {
     height: 500px;
 }
+
+.details {
+    margin: 0 -10px;
+}
+
+@media only screen and (min-width: 768px) {
+    .details {
+        display: flex;
+    }
+}
+
+.details-features, .details-pricing {
+    flex: 1 1 0;
+    padding: 0 10px;
+}

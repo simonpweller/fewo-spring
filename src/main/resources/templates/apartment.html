@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" th:lang="${#locale}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{images/favicon-32x32.png}" />
+    <link rel="stylesheet" th:href="@{/index.css}">
+    <title th:text="#{bungalow}"></title>
+</head>
+<body>
+<div class="layout">
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <main>
+        <div class="container">
+            <h1 th:text="#{apartment}"></h1>
+            <p th:utext="#{apartment.description}"></p>
+            <div class="details">
+                <div class="details-features">
+                    <h2 th:text="#{features}"></h2>
+                    <ul>
+                        <li th:text="#{apartment.feature.livingroom}"></li>
+                        <li th:text="#{apartment.feature.bedroom}"></li>
+                        <li th:text="#{apartment.feature.crib}"></li>
+                        <li th:text="#{apartment.feature.bathroom}"></li>
+                        <li th:text="#{apartment.feature.tv}"></li>
+                        <li th:text="#{feature.patio}"></li>
+                        <li th:text="#{feature.lawn}"></li>
+                        <li th:text="#{feature.parking}"></li>
+                        <li th:text="#{apartment.feature.bbq}"></li>
+                        <li th:text="#{apartment.feature.suitableForWheelchairs}"></li>
+                    </ul>
+                </div>
+                <div class="details-pricing">
+                    <h2 th:text="#{pricing}"></h2>
+                    <ul>
+                        <li th:text="#{apartment.pricing.threeNights}"></li>
+                        <li th:text="#{apartment.pricing.additionalNights}"></li>
+                        <li th:text="#{apartment.pricing.children}"></li>
+                        <li th:text="#{apartment.pricing.twoNights}"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer th:replace="fragments/footer :: footer"></footer>
+</div>
+
+</body>
+</html>
