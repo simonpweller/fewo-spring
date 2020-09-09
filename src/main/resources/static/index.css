@@ -291,3 +291,54 @@ footer .linkList {
     width: 100%;
     height: auto;
 }
+
+.form-row {
+    display: flex;
+    margin: 0 -10px;
+    flex-direction: column;
+}
+
+@media only screen and (min-width: 768px) {
+    .form-row {
+        flex-direction: row;
+    }
+}
+
+.form-field {
+    flex: 1;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field_required label::after {
+    content: '*';
+}
+
+.form-label {
+    color: #111;
+}
+
+.form-input {
+    padding: 5px;
+}
+
+.form-submitButton {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #1E412B;
+    color: #eee;
+}
+
+.form-input, .form-submitButton {
+    font-size: inherit;
+    font-family: inherit;
+    border-radius: 3px;
+    border: 1px solid rgba(0,0,0,0.2);
+}
+
+.form-input:focus, .form-submitButton:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    outline: 0;
+}

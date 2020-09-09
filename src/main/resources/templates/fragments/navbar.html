@@ -25,9 +25,15 @@
             <nav>
                 <ul class="linkList navItems">
                     <li>
-                        <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/availability' ? ' link_active' : ''}"
-                           href="/availability"
-                           th:text="#{availability}"
+                        <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/apartment' ? ' link_active' : ''}"
+                           href="/apartment"
+                           th:text="#{apartment}"
+                        ></a>
+                    </li>
+                    <li>
+                        <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/bungalow' ? ' link_active' : ''}"
+                           href="/bungalow"
+                           th:text="#{bungalow}"
                         ></a>
                     </li>
                     <li>
@@ -40,18 +46,6 @@
                         <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/directions' ? ' link_active' : ''}"
                            href="/directions"
                            th:text="#{directions}"
-                        ></a>
-                    </li>
-                    <li>
-                        <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/apartment' ? ' link_active' : ''}"
-                           href="/apartment"
-                           th:text="#{apartment}"
-                        ></a>
-                    </li>
-                    <li>
-                        <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/bungalow' ? ' link_active' : ''}"
-                           href="/bungalow"
-                           th:text="#{bungalow}"
                         ></a>
                     </li>
                 </ul>

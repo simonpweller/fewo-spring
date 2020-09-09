@@ -14,6 +14,9 @@ class PageController {
     @GetMapping("/")
     fun getHome() = "index"
 
+    @GetMapping("/booking-form")
+    fun getBookingForm() = "booking-form"
+
     @GetMapping("/directions")
     fun getDirections(model: Model): String {
         model.addAttribute("mapboxKey", mapboxKey)
