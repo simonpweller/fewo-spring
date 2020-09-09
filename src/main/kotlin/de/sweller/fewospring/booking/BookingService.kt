@@ -2,6 +2,7 @@ package de.sweller.fewospring.booking
 
 import de.sweller.fewospring.email.EmailService
 import org.springframework.dao.EmptyResultDataAccessException
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 
 @Service
@@ -24,5 +25,12 @@ class BookingService(
         } catch (e: EmptyResultDataAccessException) {
             false
         }
+    }
+
+    fun confirm(id: Long): Boolean {
+        val booking = bookingRepository.findByIdOrNull(id) ?: return false
+        booking.confirmed = true
+        bookingRepository.save(booking)
+        return true
     }
 }

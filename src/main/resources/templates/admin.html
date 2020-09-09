@@ -39,7 +39,10 @@
             <td th:text="${booking.arrivalDate}"></td>
             <td th:text="${booking.departureDate}"></td>
             <td th:text="${booking.comments}"></td>
-            <td><button type="button" class="btn btn-danger" data-th-data-id="${booking.id}">Delete</button></td>
+            <td>
+                <button type="button" class="btn btn-success" data-th-data-id="${booking.id}" th:unless="${booking.confirmed}">Confirm</button>
+                <button type="button" class="btn btn-danger" data-th-data-id="${booking.id}">Delete</button>
+            </td>
         </tr>
         </tbody>
     </table>
@@ -47,22 +50,45 @@
 <script>
     (() => {
     	const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
-    	document.querySelector('table').addEventListener('click', (e) => {
+
+		document.querySelector('table').addEventListener('click', (e) => {
     		if (e.target.type === 'button') {
-                const id = e.target.getAttribute('data-id')
-                fetch(`/admin/bookings/${id}`, {
-                	method: 'DELETE',
-                    headers: {
-                		'X-CSRF-TOKEN': csrfToken,
-                    }
-                }).then(() => {
-                	location.reload()
-                }).catch(e => {
-                	console.error(e)
-                });
+                const id = e.target.getAttribute('data-id');
+                if (e.target.classList.contains('btn-success')) {
+                	confirmBookingById(id);
+                } else {
+                    deleteBookingById(id);
+                }
             }
-        })
-    })()
+        });
+
+		function deleteBookingById(id) {
+			fetch(`/admin/bookings/${id}`, {
+				method: 'DELETE',
+				headers: {
+					'X-CSRF-TOKEN': csrfToken,
+				},
+			}).then(() => {
+				location.reload()
+			}).catch(e => {
+				console.error(e)
+			});
+		}
+
+		function confirmBookingById(id) {
+			fetch(`/admin/bookings/${id}/confirm`, {
+				method: 'POST',
+				headers: {
+					'X-CSRF-TOKEN': csrfToken,
+				},
+			}).then(() => {
+				location.reload()
+			}).catch(e => {
+				console.error(e)
+			});
+		}
+
+	})()
 </script>
 
 </body>

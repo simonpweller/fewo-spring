@@ -19,5 +19,6 @@ class Booking(
         var departureDate: LocalDate,
         @Enumerated(EnumType.STRING) var property: Property,
         @Lob var comments: String,
+        var confirmed: Boolean = false,
         @Id @GeneratedValue var id: Long? = null,
 )
