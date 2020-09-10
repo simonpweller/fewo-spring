@@ -23,13 +23,26 @@ class EmailService(
     @Value("\${spring.mail.username}")
     lateinit var fromAddress: String
 
-    fun sendConfirmationMail(booking: Booking) {
-        val locale = LocaleContextHolder.getLocale()
-        val dateTimeFormatter = DateTimeFormatter.ofPattern(if (locale == Locale.ENGLISH) "dd/MM/yyyy" else "dd.MM.yyyy")
+    fun sendRequestConfirmationMail(booking: Booking) {
+        val dateTimeFormatter = DateTimeFormatter.ofPattern(if (booking.locale == Locale.ENGLISH) "dd/MM/yyyy" else "dd.MM.yyyy")
         sendTemplatedMessage(
                 to = booking.email,
-                subject = messageSource.getMessage("mail.bookingRequest.subject", null, locale),
+                subject = messageSource.getMessage("mail.bookingRequest.subject", null, booking.locale),
                 template = "mail/booking-request-confirmation",
+                mapOf(
+                        "isBungalow" to (booking.property == Property.BUNGALOW),
+                        "arrivalDate" to booking.arrivalDate.format(dateTimeFormatter),
+                        "departureDate" to booking.departureDate.format(dateTimeFormatter),
+                )
+        )
+    }
+
+    fun sendConfirmationMail(booking: Booking) {
+        val dateTimeFormatter = DateTimeFormatter.ofPattern(if (booking.locale == Locale.ENGLISH) "dd/MM/yyyy" else "dd.MM.yyyy")
+        sendTemplatedMessage(
+                to = booking.email,
+                subject = messageSource.getMessage("mail.bookingConfirmation.subject", null, booking.locale),
+                template = "mail/booking-confirmation",
                 mapOf(
                         "isBungalow" to (booking.property == Property.BUNGALOW),
                         "arrivalDate" to booking.arrivalDate.format(dateTimeFormatter),

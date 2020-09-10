@@ -2,6 +2,7 @@ package de.sweller.fewospring.booking
 
 import org.springframework.format.annotation.DateTimeFormat
 import java.time.LocalDate
+import java.util.*
 
 const val DATE_INPUT_FORMAT = "yyyy-MM-dd"
 
@@ -19,6 +20,7 @@ data class BookingData(
         val departureDate: LocalDate,
         val property: Property,
         val comments: String,
+        val locale: Locale,
 ) {
     fun toBooking() = Booking(
             firstName = this.firstName,
@@ -32,5 +34,6 @@ data class BookingData(
             departureDate = this.departureDate,
             property = this.property,
             comments = this.comments,
+            locale = this.locale,
     )
 }

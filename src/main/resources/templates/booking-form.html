@@ -95,6 +95,7 @@
                 </div>
 
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                <input type="hidden" th:name="locale" th:value="${#locale}"/>
 
                 <button type="submit" class="form-submitButton" th:text="#{bookingForm.submit}"></button>
             </form>

@@ -2,6 +2,7 @@ package de.sweller.fewospring.booking
 
 import org.springframework.data.repository.CrudRepository
 import java.time.LocalDate
+import java.util.*
 import javax.persistence.*
 
 interface BookingRepository: CrudRepository<Booking, Long>
@@ -20,5 +21,6 @@ class Booking(
         @Enumerated(EnumType.STRING) var property: Property,
         @Lob var comments: String,
         var confirmed: Boolean = false,
+        var locale: Locale,
         @Id @GeneratedValue var id: Long? = null,
 )
