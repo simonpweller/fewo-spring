@@ -16,6 +16,7 @@ class BookingService(
     fun addBooking(bookingData: BookingData) {
         val booking = bookingRepository.save(bookingData.toBooking())
         emailService.sendRequestConfirmationMail(booking)
+        emailService.sendRequestNotificationMail(booking)
     }
 
     fun delete(id: Long): Boolean {

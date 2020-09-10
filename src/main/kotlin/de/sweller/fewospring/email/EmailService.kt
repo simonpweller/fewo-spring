@@ -21,7 +21,7 @@ class EmailService(
 ) {
 
     @Value("\${spring.mail.username}")
-    lateinit var fromAddress: String
+    lateinit var adminMail: String
 
     fun sendRequestConfirmationMail(booking: Booking) {
         val dateTimeFormatter = DateTimeFormatter.ofPattern(if (booking.locale == Locale.ENGLISH) "dd/MM/yyyy" else "dd.MM.yyyy")
@@ -35,6 +35,16 @@ class EmailService(
                         "departureDate" to booking.departureDate.format(dateTimeFormatter),
                 )
         )
+    }
+
+    fun sendRequestNotificationMail(booking: Booking) {
+        sendTemplatedMessage(
+                to = adminMail,
+                subject = "New Booking Request",
+                template = "mail/booking-notification",
+                mapOf("booking" to booking),
+        )
+
     }
 
     fun sendConfirmationMail(booking: Booking) {
@@ -61,7 +71,7 @@ class EmailService(
     private fun sendHtmlMessage(to: String, subject: String, htmlBody: String) {
         val mimeMessage = mailSender.createMimeMessage()
         MimeMessageHelper(mimeMessage, true, "UTF-8").apply {
-            setFrom(fromAddress)
+            setFrom(adminMail)
             setTo(to)
             setSubject(subject)
             setText(htmlBody, true)
