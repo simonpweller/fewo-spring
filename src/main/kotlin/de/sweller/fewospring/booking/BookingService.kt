@@ -1,6 +1,9 @@
 package de.sweller.fewospring.booking
 
 import de.sweller.fewospring.email.EmailService
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
@@ -15,8 +18,8 @@ class BookingService(
 
     fun addBooking(bookingData: BookingData) {
         val booking = bookingRepository.save(bookingData.toBooking())
-        emailService.sendRequestConfirmationMail(booking)
-        emailService.sendRequestNotificationMail(booking)
+        GlobalScope.launch { emailService.sendRequestConfirmationMail(booking) }
+        GlobalScope.launch { emailService.sendRequestNotificationMail(booking) }
     }
 
     fun delete(id: Long): Boolean {
@@ -32,7 +35,7 @@ class BookingService(
         val booking = bookingRepository.findByIdOrNull(id) ?: return false
         booking.confirmed = true
         bookingRepository.save(booking)
-        emailService.sendConfirmationMail(booking)
+        GlobalScope.launch { emailService.sendConfirmationMail(booking) }
         return true
     }
 }
