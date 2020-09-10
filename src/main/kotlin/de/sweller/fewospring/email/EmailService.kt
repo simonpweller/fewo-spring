@@ -1,5 +1,7 @@
 package de.sweller.fewospring.email
 
+import de.sweller.fewospring.booking.Booking
+import de.sweller.fewospring.booking.Property
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.MessageSource
 import org.springframework.context.i18n.LocaleContextHolder
@@ -8,6 +10,8 @@ import org.springframework.mail.javamail.MimeMessageHelper
 import org.springframework.stereotype.Service
 import org.thymeleaf.context.Context
 import org.thymeleaf.spring5.SpringTemplateEngine
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 @Service
 class EmailService(
@@ -19,12 +23,18 @@ class EmailService(
     @Value("\${spring.mail.username}")
     lateinit var fromAddress: String
 
-    fun sendConfirmationMail(toAddress: String) {
+    fun sendConfirmationMail(booking: Booking) {
         val locale = LocaleContextHolder.getLocale()
+        val dateTimeFormatter = DateTimeFormatter.ofPattern(if (locale == Locale.ENGLISH) "dd/MM/yyyy" else "dd.MM.yyyy")
         sendTemplatedMessage(
-                to = toAddress,
-                subject = messageSource.getMessage("confirmationMail.subject", null, locale),
-                template = "mail/booking-confirmation",
+                to = booking.email,
+                subject = messageSource.getMessage("mail.bookingRequest.subject", null, locale),
+                template = "mail/booking-request-confirmation",
+                mapOf(
+                        "isBungalow" to (booking.property == Property.BUNGALOW),
+                        "arrivalDate" to booking.arrivalDate.format(dateTimeFormatter),
+                        "departureDate" to booking.departureDate.format(dateTimeFormatter),
+                )
         )
     }
 

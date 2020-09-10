@@ -14,8 +14,8 @@ class BookingService(
     fun getBookings(): MutableIterable<Booking> = bookingRepository.findAll()
 
     fun addBooking(bookingData: BookingData) {
-        bookingRepository.save(bookingData.toBooking())
-        emailService.sendConfirmationMail(bookingData.email)
+        val booking = bookingRepository.save(bookingData.toBooking())
+        emailService.sendConfirmationMail(booking)
     }
 
     fun delete(id: Long): Boolean {

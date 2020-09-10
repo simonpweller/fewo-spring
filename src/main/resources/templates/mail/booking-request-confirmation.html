@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:text="#{mail.bookingRequest.subject}"></title>
+</head>
+<body>
+
+    <h1 th:text="#{mail.bookingRequest.subject}"></h1>
+
+    <p>
+        <span th:text="#{mail.bookingRequest.thankYou}"></span>
+        <span th:text="${isBungalow} ? #{mail.bookingRequest.ourBungalow} : #{mail.bookingRequest.ourApartment}"></span>
+        <span th:text="#{mail.bookingRequest.time(${arrivalDate}, ${departureDate})}"></span>
+    </p>
+
+    <p th:text="#{mail.bookingRequest.nextSteps}"></p>
+
+    <p>
+        <span th:text="#{mail.bookingRequest.greeting}"></span><br/>
+        <span th:text="#{mail.bookingRequest.name}"></span>
+    </p>
+</body>
+</html>
