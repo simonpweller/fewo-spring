@@ -8,7 +8,7 @@
     <h1>New Booking Request</h1>
 
     <p>A visitor made a new booking request</p>
-    <p><strong>Name</strong>: <span th:text="${booking.firstName}"></span><span th:text="${booking.firstName}"></span></p>
+    <p><strong>Name</strong>: <span th:text="${booking.firstName}"> </span><span th:text="${booking.lastName}"></span></p>
     <p><strong>Address</strong>: <span th:text="${booking.streetLine}"></span><span th:if="${booking.streetLine != null}">, </span><span th:text="|${booking.zipCode} ${booking.city}|"></span></p>
     <p><strong>Requested dates</strong>: <span th:text="${booking.arrivalDate}"></span> - <span th:text="${booking.departureDate}"></span></p>
     <p><strong>Email</strong>: <span th:text="${booking.email}"></span></p>
