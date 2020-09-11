@@ -27,9 +27,10 @@ class EmailService(
         val dateTimeFormatter = DateTimeFormatter.ofPattern(if (booking.locale == Locale.ENGLISH) "dd/MM/yyyy" else "dd.MM.yyyy")
         sendTemplatedMessage(
                 to = booking.email,
+                locale = booking.locale,
                 subject = messageSource.getMessage("bookingRequest", null, booking.locale),
                 template = "mail/booking-request-confirmation",
-                mapOf(
+                templateModel = mapOf(
                         "isBungalow" to (booking.property == Property.BUNGALOW),
                         "arrivalDate" to booking.arrivalDate.format(dateTimeFormatter),
                         "departureDate" to booking.departureDate.format(dateTimeFormatter),
@@ -40,9 +41,10 @@ class EmailService(
     fun sendRequestNotificationMail(booking: Booking) {
         sendTemplatedMessage(
                 to = adminMail,
+                locale = Locale.ENGLISH,
                 subject = "New Booking Request",
                 template = "mail/booking-notification",
-                mapOf("booking" to booking),
+                templateModel = mapOf("booking" to booking),
         )
 
     }
@@ -51,9 +53,10 @@ class EmailService(
         val dateTimeFormatter = DateTimeFormatter.ofPattern(if (booking.locale == Locale.ENGLISH) "dd/MM/yyyy" else "dd.MM.yyyy")
         sendTemplatedMessage(
                 to = booking.email,
+                locale = booking.locale,
                 subject = messageSource.getMessage("bookingConfirmation.subject", null, booking.locale),
                 template = "mail/booking-confirmation",
-                mapOf(
+                templateModel = mapOf(
                         "isBungalow" to (booking.property == Property.BUNGALOW),
                         "arrivalDate" to booking.arrivalDate.format(dateTimeFormatter),
                         "departureDate" to booking.departureDate.format(dateTimeFormatter),
@@ -61,8 +64,7 @@ class EmailService(
         )
     }
 
-    private fun sendTemplatedMessage(to: String, subject: String, template: String, templateModel: Map<String, Any>? = emptyMap()) {
-        val locale = LocaleContextHolder.getLocale()
+    private fun sendTemplatedMessage(to: String, subject: String, template: String, templateModel: Map<String, Any>? = emptyMap(), locale: Locale) {
         val context = Context(locale, templateModel)
         val htmlBody = emailTemplateEngine.process(template, context)
         sendHtmlMessage(to, subject, htmlBody)
