@@ -17,6 +17,9 @@ class PageController {
     @GetMapping("/booking-form")
     fun getBookingForm() = "booking-form"
 
+    @GetMapping("/booking-confirmation")
+    fun getBookingConfirmation() = "booking-confirmation"
+
     @GetMapping("/directions")
     fun getDirections(model: Model): String {
         model.addAttribute("mapboxKey", mapboxKey)

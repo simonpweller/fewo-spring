@@ -2,23 +2,23 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title th:text="#{mail.bookingConfirmation.subject}"></title>
+    <title th:text="#{bookingConfirmation.subject}"></title>
 </head>
 <body>
 
-    <h1 th:text="#{mail.bookingConfirmation.subject}"></h1>
+    <h1 th:text="#{bookingConfirmation.subject}"></h1>
 
     <p>
-        <span th:text="#{mail.bookingConfirmation.confirmation}"></span>
-        <span th:text="${isBungalow} ? #{mail.ourBungalow} : #{mail.ourApartment}"></span>
-        <span th:text="#{mail.time(${arrivalDate}, ${departureDate})}"></span>
+        <span th:text="#{bookingConfirmation.confirmation}"></span>
+        <span th:text="${isBungalow} ? #{ourBungalow} : #{ourApartment}"></span>
+        <span th:text="#{datesOfStay(${arrivalDate}, ${departureDate})}"></span>
     </p>
 
-    <p th:text="#{mail.bookingConfirmation.nextSteps}"></p>
+    <p th:text="#{bookingConfirmation.nextSteps}"></p>
 
     <p>
-        <span th:text="#{mail.greeting}"></span><br/>
-        <span th:text="#{mail.name}"></span>
+        <span th:text="#{greeting}"></span><br/>
+        <span th:text="#{name}"></span>
     </p>
 </body>
 </html>

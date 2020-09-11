@@ -27,7 +27,7 @@ class EmailService(
         val dateTimeFormatter = DateTimeFormatter.ofPattern(if (booking.locale == Locale.ENGLISH) "dd/MM/yyyy" else "dd.MM.yyyy")
         sendTemplatedMessage(
                 to = booking.email,
-                subject = messageSource.getMessage("mail.bookingRequest.subject", null, booking.locale),
+                subject = messageSource.getMessage("bookingRequest", null, booking.locale),
                 template = "mail/booking-request-confirmation",
                 mapOf(
                         "isBungalow" to (booking.property == Property.BUNGALOW),
@@ -51,7 +51,7 @@ class EmailService(
         val dateTimeFormatter = DateTimeFormatter.ofPattern(if (booking.locale == Locale.ENGLISH) "dd/MM/yyyy" else "dd.MM.yyyy")
         sendTemplatedMessage(
                 to = booking.email,
-                subject = messageSource.getMessage("mail.bookingConfirmation.subject", null, booking.locale),
+                subject = messageSource.getMessage("bookingConfirmation.subject", null, booking.locale),
                 template = "mail/booking-confirmation",
                 mapOf(
                         "isBungalow" to (booking.property == Property.BUNGALOW),
