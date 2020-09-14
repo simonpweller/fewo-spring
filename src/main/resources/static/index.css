@@ -121,6 +121,7 @@ main {
     position: relative;
     display: flex;
     align-items: center;
+    background-color: #1E412B;
 }
 
 .banner-img {
