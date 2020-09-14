@@ -32,4 +32,6 @@ class PageController {
     @GetMapping("/bungalow")
     fun getBungalowDetail() = "bungalow"
 
+    @GetMapping("/imprint")
+    fun getImprint() = "imprint"
 }
