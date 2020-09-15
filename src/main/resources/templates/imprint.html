@@ -18,35 +18,11 @@
             <h1 th:text="#{imprint}"></h1>
 
             <h2 th:text="#{address.contact}"></h2>
-            <address class="vcard">
-                <div class="fn">Bernd Böhme</div>
-                <div class="adr">
-                    <div class="street-address">Zum Waldblick 42a</div>
-                    <div>
-                        <span class="postal-code">09633</span>&nbsp;<span class="locality">Halsbrücke</span>
-                    </div>
-                    <div class="country-name">Deutschland</div>
-                    <a
-                            th:href="'mailto: ' + ${@environment.getProperty('MAIL_USER')}"
-                            th:text="${@environment.getProperty('MAIL_USER')}"
-                            class="email"
-                    ></a>
-                </div>
-            </address>
-
+            <div th:replace="fragments/address :: address"></div>
         </div>
     </main>
 
     <footer th:replace="fragments/footer :: footer"></footer>
 </div>
-
-<script>
-	const link = document.createElement('link');
-	link.href = 'https://fonts.googleapis.com/css?family=Kalam:700';
-	link.rel = 'stylesheet';
-
-	document.head.appendChild(link);
-</script>
-
 </body>
 </html>

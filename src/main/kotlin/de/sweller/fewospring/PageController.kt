@@ -34,4 +34,7 @@ class PageController {
 
     @GetMapping("/imprint")
     fun getImprint() = "imprint"
+
+    @GetMapping("/privacy")
+    fun getPrivacy() = "privacy"
 }

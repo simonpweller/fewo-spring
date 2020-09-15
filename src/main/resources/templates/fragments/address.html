@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Address</title>
+</head>
+<body>
+<address class="vcard" th:fragment="address">
+    <div class="fn">Bernd Böhme</div>
+    <div class="adr">
+        <div class="street-address">Zum Waldblick 42a</div>
+        <div>
+            <span class="postal-code">09633</span>&nbsp;<span class="locality">Halsbrücke</span>
+        </div>
+        <div class="country-name">Deutschland</div>
+        <a
+                th:href="'mailto: ' + ${@environment.getProperty('MAIL_USER')}"
+                th:text="${@environment.getProperty('MAIL_USER')}"
+                class="email"
+        ></a>
+    </div>
+</address>
+</body>
+</html>
