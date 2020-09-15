@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+h1, h2, h3 {
+    font-family: 'Kalam', sans-serif;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -134,7 +138,6 @@ main {
 }
 
 .banner-text {
-    font-family: 'Kalam', cursive;
     font-weight: 700;
     font-size: 300%;
     color: #eee;
