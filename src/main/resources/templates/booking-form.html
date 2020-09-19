@@ -15,7 +15,7 @@
 
     <main>
         <div class="container">
-            <h1 th:text="#{bookingForm.heading}"></h1>
+            <h1 th:text="#{bookNow}"></h1>
             <form action="/bookings" method="post">
                 <div class="form-row">
                     <div class="form-field form-field_required">
@@ -24,10 +24,12 @@
                             <option
                                     th:value="${T(de.sweller.fewospring.booking.Property).APARTMENT}"
                                     th:text="#{apartment}"
+                                    th:selected="${property == T(de.sweller.fewospring.booking.Property).APARTMENT}"
                             ></option>
                             <option
                                     th:value="${T(de.sweller.fewospring.booking.Property).BUNGALOW}"
                                     th:text="#{bungalow}"
+                                    th:selected="${property == T(de.sweller.fewospring.booking.Property).BUNGALOW}"
                             ></option>
                         </select>
                     </div>
@@ -97,7 +99,7 @@
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                 <input type="hidden" th:name="locale" th:value="${#locale}"/>
 
-                <button type="submit" class="form-submitButton" th:text="#{bookingForm.submit}"></button>
+                <button type="submit" class="button" th:text="#{bookingForm.submit}"></button>
             </form>
         </div>
     </main>

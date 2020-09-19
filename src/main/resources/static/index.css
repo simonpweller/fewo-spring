@@ -284,6 +284,7 @@ footer .linkList {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    margin: 0 -10px;
 }
 
 .gallery-imageWrapper {
@@ -328,21 +329,23 @@ footer .linkList {
     padding: 5px;
 }
 
-.form-submitButton {
+.button {
     margin: 10px 0;
     padding: 10px;
     background-color: #1E412B;
     color: #eee;
+    display: inline-block;
+    text-decoration: none;
 }
 
-.form-input, .form-submitButton {
+.form-input, .button {
     font-size: inherit;
     font-family: inherit;
     border-radius: 3px;
     border: 1px solid rgba(0,0,0,0.2);
 }
 
-.form-input:focus, .form-submitButton:focus {
+.form-input:focus, .button:focus {
     border-color: #80bdff;
     box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
     outline: 0;
