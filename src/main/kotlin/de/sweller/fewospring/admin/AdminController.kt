@@ -1,5 +1,6 @@
 package de.sweller.fewospring.admin
 
+import de.sweller.fewospring.booking.BookingData
 import de.sweller.fewospring.booking.BookingService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -18,6 +19,15 @@ class AdminController(
     fun getBookings(model: Model): String {
         model.addAttribute("bookings", bookingService.getBookings())
         return "admin"
+    }
+
+    @GetMapping("/new")
+    fun getBookingForm(): String = "admin-booking-form"
+
+    @PostMapping
+    fun addBooking(bookingData: BookingData): String {
+        bookingService.addBooking(bookingData)
+        return "redirect:/admin/bookings"
     }
 
     @DeleteMapping("/{id}")

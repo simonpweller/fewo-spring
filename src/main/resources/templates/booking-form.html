@@ -20,7 +20,7 @@
                 <div class="form-row">
                     <div class="form-field form-field_required">
                         <label for="property" th:text="#{bookingForm.property}"></label>
-                        <select class="form-input" name="property" id="property">
+                        <select class="form-input" name="property" id="property" required>
                             <option
                                     th:value="${T(de.sweller.fewospring.booking.Property).APARTMENT}"
                                     th:text="#{apartment}"

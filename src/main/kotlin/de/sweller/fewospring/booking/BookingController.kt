@@ -14,7 +14,7 @@ class BookingController(
 ) {
     @PostMapping
     fun createBooking(bookingData: BookingData, locale: Locale, redirectAttributes: RedirectAttributes): String {
-        val booking = bookingService.addBooking(bookingData)
+        val booking = bookingService.requestBooking(bookingData)
         val dateTimeFormatter = DateTimeFormatter.ofPattern(if (booking.locale == Locale.ENGLISH) "dd/MM/yyyy" else "dd.MM.yyyy")
         redirectAttributes.addFlashAttribute("isBungalow", booking.property == Property.BUNGALOW)
         redirectAttributes.addFlashAttribute("arrivalDate", booking.arrivalDate.format(dateTimeFormatter))

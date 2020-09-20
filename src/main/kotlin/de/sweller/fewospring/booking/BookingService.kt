@@ -16,11 +16,15 @@ class BookingService(
 
     fun getBookings(): MutableIterable<Booking> = bookingRepository.findAll()
 
-    fun addBooking(bookingData: BookingData): Booking {
+    fun requestBooking(bookingData: BookingData): Booking {
         val booking = bookingRepository.save(bookingData.toBooking())
         GlobalScope.launch { emailService.sendRequestConfirmationMail(booking) }
         GlobalScope.launch { emailService.sendRequestNotificationMail(booking) }
         return booking
+    }
+
+    fun addBooking(bookingData: BookingData) {
+        bookingRepository.save(bookingData.toBooking().apply { this.confirmed = true })
     }
 
     fun delete(id: Long): Boolean {
