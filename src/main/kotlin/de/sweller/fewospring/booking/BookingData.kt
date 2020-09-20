@@ -7,6 +7,7 @@ import java.util.*
 const val DATE_INPUT_FORMAT = "yyyy-MM-dd"
 
 data class BookingData(
+        val id: Long? = null,
         val firstName: String,
         val lastName: String,
         val streetLine: String,
@@ -23,6 +24,7 @@ data class BookingData(
         val locale: Locale,
 ) {
     fun toBooking() = Booking(
+            id = this.id,
             firstName = this.firstName,
             lastName = this.lastName,
             streetLine = this.streetLine,

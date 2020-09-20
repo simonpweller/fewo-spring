@@ -40,6 +40,7 @@
             <td th:text="${booking.departureDate}"></td>
             <td th:text="${booking.comments}"></td>
             <td>
+                <a class="btn btn-primary" th:href="'/admin/bookings/' + ${booking.id}">Edit</a>
                 <button type="button" class="btn btn-success" data-th-data-id="${booking.id}" th:unless="${booking.confirmed}">Confirm</button>
                 <button type="button" class="btn btn-danger" data-th-data-id="${booking.id}">Delete</button>
             </td>

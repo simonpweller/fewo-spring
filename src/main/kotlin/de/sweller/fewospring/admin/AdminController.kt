@@ -24,9 +24,16 @@ class AdminController(
     @GetMapping("/new")
     fun getBookingForm(): String = "admin-booking-form"
 
+    @GetMapping("/{id}")
+    fun getEditBookingForm(@PathVariable id: Long, model: Model): String {
+        val booking = bookingService.getBooking(id) ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
+        model.addAttribute("booking", booking)
+        return "admin-booking-form"
+    }
+
     @PostMapping
-    fun addBooking(bookingData: BookingData): String {
-        bookingService.addBooking(bookingData)
+    fun saveBooking(bookingData: BookingData): String {
+        bookingService.saveBooking(bookingData)
         return "redirect:/admin/bookings"
     }
 
