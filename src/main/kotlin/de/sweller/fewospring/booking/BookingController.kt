@@ -1,9 +1,9 @@
 package de.sweller.fewospring.booking
 
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.mvc.support.RedirectAttributes
+import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
 
@@ -21,4 +21,11 @@ class BookingController(
         redirectAttributes.addFlashAttribute("departureDate", booking.departureDate.format(dateTimeFormatter))
         return "redirect:/booking-confirmation"
     }
+
+    @GetMapping
+    @ResponseBody
+    fun getBookedDates(
+            @RequestParam month: Int?,
+            @RequestParam year: Int?,
+    ): AvailabilityMonth = availabilityFor(month ?: LocalDate.now().monthValue, year ?: LocalDate.now().year)
 }
