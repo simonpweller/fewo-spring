@@ -27,5 +27,12 @@ class BookingController(
     fun getBookedDates(
             @RequestParam month: Int?,
             @RequestParam year: Int?,
-    ): AvailabilityMonth = availabilityFor(month ?: LocalDate.now().monthValue, year ?: LocalDate.now().year)
+            @RequestParam property: Property?,
+    ): AvailabilityMonth {
+        val nonNullMonth = month ?: LocalDate.now().monthValue
+        val nonNullYear = year ?: LocalDate.now().year
+        val nonNullProperty = property ?: Property.APARTMENT
+        val bookedDates = bookingService.getBookedDates(nonNullYear, nonNullMonth, nonNullProperty)
+        return availabilityFor(nonNullYear, nonNullMonth, bookedDates)
+    }
 }

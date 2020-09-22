@@ -6,6 +6,8 @@ import kotlinx.coroutines.launch
 import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
+import java.time.LocalDate
+import java.time.YearMonth
 
 @Service
 class BookingService(
@@ -16,6 +18,15 @@ class BookingService(
     fun getBookings(): MutableIterable<Booking> = bookingRepository.findAll()
 
     fun getBooking(id: Long) = bookingRepository.findByIdOrNull(id)
+
+    fun getBookedDates(year: Int, month: Int, property: Property): Set<LocalDate> {
+        val lastDateBefore = YearMonth.of(year, month).atDay(1).minusDays(1)
+        val firstDateAfter = YearMonth.of(year, month).atEndOfMonth().plusDays(1)
+        val bookings = bookingRepository.findByDepartureDateAfterAndPropertyAndConfirmedTrue(lastDateBefore, property)
+        return bookings.fold(emptySet()) {
+            bookedDates, booking -> bookedDates.plus(booking.bookedDates.filter { it.isBefore(firstDateAfter) })
+        }
+    }
 
     fun requestBooking(bookingData: BookingData): Booking {
         val booking = bookingRepository.save(bookingData.toBooking())
