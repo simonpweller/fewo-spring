@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en" th:lang="${#locale}" xmlns:th="http://www.thymeleaf.org">
 <div class="calendar">
+    <h1 th:text="${availability.yearMonth}"></h1>
     <table>
         <thead>
         <tr>
@@ -23,5 +24,7 @@
         </tr>
         </tbody>
     </table>
+    <p>Previous: <span th:text="${availability.yearMonth.minusMonths(1)}"></span></p>
+    <p>Next: <span th:text="${availability.yearMonth.plusMonths(1)}"></span></p>
 </div>
 </html>
