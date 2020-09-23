@@ -5,6 +5,7 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.mvc.support.RedirectAttributes
 import java.time.LocalDate
+import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.*
 
@@ -30,11 +31,9 @@ class BookingController(
             @RequestParam property: Property?,
             model: Model
     ): String {
-        val nonNullMonth = month ?: LocalDate.now().monthValue
-        val nonNullYear = year ?: LocalDate.now().year
-        val nonNullProperty = property ?: Property.APARTMENT
-        val bookedDates = bookingService.getBookedDates(nonNullYear, nonNullMonth, nonNullProperty)
-        val availability = availabilityFor(nonNullYear, nonNullMonth, bookedDates)
+        val yearMonth = YearMonth.of(year ?: LocalDate.now().year, month ?: LocalDate.now().monthValue)
+        val bookedDates = bookingService.getBookedDates(yearMonth, property ?: Property.APARTMENT)
+        val availability = availabilityFor(yearMonth, bookedDates)
         model.addAttribute("availability", availability)
         return "calendar"
     }
