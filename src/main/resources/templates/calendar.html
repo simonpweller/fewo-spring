@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" th:lang="${#locale}" xmlns:th="http://www.thymeleaf.org">
+<div class="calendar">
+    <table>
+        <thead>
+        <tr>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+            <th>Sunday</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="week: ${availability.weeks}">
+            <td
+                    th:each="day: ${week}"
+                    th:text="${day.isInCurrentMonth()} ? ${day.dayOfMonth} : ''"
+                    th:class="${day.isBooked() ? 'calendar-cell__booked' : ''}"
+            ></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</html>

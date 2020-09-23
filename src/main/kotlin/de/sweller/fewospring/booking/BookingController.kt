@@ -1,6 +1,7 @@
 package de.sweller.fewospring.booking
 
 import org.springframework.stereotype.Controller
+import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.mvc.support.RedirectAttributes
 import java.time.LocalDate
@@ -23,16 +24,18 @@ class BookingController(
     }
 
     @GetMapping
-    @ResponseBody
     fun getBookedDates(
             @RequestParam month: Int?,
             @RequestParam year: Int?,
             @RequestParam property: Property?,
-    ): AvailabilityMonth {
+            model: Model
+    ): String {
         val nonNullMonth = month ?: LocalDate.now().monthValue
         val nonNullYear = year ?: LocalDate.now().year
         val nonNullProperty = property ?: Property.APARTMENT
         val bookedDates = bookingService.getBookedDates(nonNullYear, nonNullMonth, nonNullProperty)
-        return availabilityFor(nonNullYear, nonNullMonth, bookedDates)
+        val availability = availabilityFor(nonNullYear, nonNullMonth, bookedDates)
+        model.addAttribute("availability", availability)
+        return "calendar"
     }
 }
