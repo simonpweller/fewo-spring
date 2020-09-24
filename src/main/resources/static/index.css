@@ -355,8 +355,31 @@ footer .linkList {
     display: inline-block;
 }
 
+.calendar th {
+    width: 100px;
+}
+
+.calendar td, .calendar th {
+    text-align: center;
+}
+
+.calendar-longHeading {
+    display: none;
+}
+
+@media only screen and (min-width: 768px) {
+    .calendar-longHeading {
+        display: inline;
+    }
+
+    .calendar-shortHeading {
+        display: none;
+    }
+}
+
 .calendar-cell__booked {
     font-weight: bold;
+    color: #c6082b;
 }
 
 .calendar-controls {

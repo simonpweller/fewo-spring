@@ -5,13 +5,34 @@
     <table>
         <thead>
         <tr>
-            <th th:text="#{monday}"></th>
-            <th th:text="#{tuesday}"></th>
-            <th th:text="#{wednesday}"></th>
-            <th th:text="#{thursday}"></th>
-            <th th:text="#{friday}"></th>
-            <th th:text="#{saturday}"></th>
-            <th th:text="#{sunday}"></th>
+            <th>
+                <span class="calendar-longHeading" th:text="#{monday}"></span>
+                <span class="calendar-shortHeading" th:text="${#strings.substring('__#{monday}__', 0, 2)}"></span>
+            </th>
+            <th>
+                <span class="calendar-longHeading" th:text="#{tuesday}"></span>
+                <span class="calendar-shortHeading" th:text="${#strings.substring('__#{tuesday}__', 0, 2)}"></span>
+            </th>
+            <th>
+                <span class="calendar-longHeading" th:text="#{wednesday}"></span>
+                <span class="calendar-shortHeading" th:text="${#strings.substring('__#{wednesday}__', 0, 2)}"></span>
+            </th>
+            <th>
+                <span class="calendar-longHeading" th:text="#{thursday}"></span>
+                <span class="calendar-shortHeading" th:text="${#strings.substring('__#{thursday}__', 0, 2)}"></span>
+            </th>
+            <th>
+                <span class="calendar-longHeading" th:text="#{friday}"></span>
+                <span class="calendar-shortHeading" th:text="${#strings.substring('__#{friday}__', 0, 2)}"></span>
+            </th>
+            <th>
+                <span class="calendar-longHeading" th:text="#{saturday}"></span>
+                <span class="calendar-shortHeading" th:text="${#strings.substring('__#{saturday}__', 0, 2)}"></span>
+            </th>
+            <th>
+                <span class="calendar-longHeading" th:text="#{sunday}"></span>
+                <span class="calendar-shortHeading" th:text="${#strings.substring('__#{sunday}__', 0, 2)}"></span>
+            </th>
         </tr>
         </thead>
         <tbody>
