@@ -110,14 +110,29 @@
     <footer th:replace="fragments/footer :: footer"></footer>
 </div>
 
-<script>
-    (() => {
-    	const calendarContainer = document.getElementById('calendar-container')
-    	fetch('/bookings')
-            .then(res => res.text())
-            .then(html => calendarContainer.innerHTML = html)
-            .catch(e => console.error(e));
-    })()
+<script th:inline="javascript">
+	(() => {
+		const calendarContainer = document.getElementById('calendar-container');
+
+		fetchBookings()
+
+		calendarContainer.addEventListener('click', (e) => {
+            if (!e.target.classList.contains('calendar-control')) return;
+            const month = e.target.getAttribute('data-month');
+			const year = e.target.getAttribute('data-year');
+            const urlParams = new URLSearchParams();
+            urlParams.append('month', month)
+            urlParams.append('year', year)
+            fetchBookings(`/bookings?${urlParams.toString()}`)
+		});
+
+		function fetchBookings(url = '/bookings') {
+			fetch(url)
+				.then(res => res.text())
+				.then(html => calendarContainer.innerHTML = html)
+				.catch(e => console.error(e));
+		}
+	})()
 </script>
 </body>
 </html>

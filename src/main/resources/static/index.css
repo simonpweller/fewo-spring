@@ -351,6 +351,15 @@ footer .linkList {
     outline: 0;
 }
 
+.calendar {
+    display: inline-block;
+}
+
 .calendar-cell__booked {
     font-weight: bold;
+}
+
+.calendar-controls {
+    display: flex;
+    justify-content: space-between;
 }

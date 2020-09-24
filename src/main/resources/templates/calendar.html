@@ -24,7 +24,19 @@
         </tr>
         </tbody>
     </table>
-    <p>Previous: <span th:text="${availability.yearMonth.minusMonths(1)}"></span></p>
-    <p>Next: <span th:text="${availability.yearMonth.plusMonths(1)}"></span></p>
+    <div class="calendar-controls">
+        <button
+                class="button calendar-control"
+                id="calendar-prev"
+                th:text="${#temporals.format(availability.yearMonth.minusMonths(1), 'MMMM YYYY')}"
+                th:attr="data-month=${availability.yearMonth.minusMonths(1).monthValue}, data-year=${availability.yearMonth.minusMonths(1).year}"
+        ></button>
+        <button
+                class="button calendar-control"
+                id="calendar-next"
+                th:text="${#temporals.format(availability.yearMonth.plusMonths(1), 'MMMM YYYY')}"
+                th:attr="data-month=${availability.yearMonth.plusMonths(1).monthValue}, data-year=${availability.yearMonth.plusMonths(1).year}"
+        ></button>
+    </div>
 </div>
 </html>
