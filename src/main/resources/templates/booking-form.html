@@ -16,6 +16,9 @@
     <main>
         <div class="container">
             <h1 th:text="#{bookNow}"></h1>
+            <div id="calendar-container">
+
+            </div>
             <form action="/bookings" method="post">
                 <div class="form-row">
                     <div class="form-field form-field_required">
@@ -106,5 +109,15 @@
 
     <footer th:replace="fragments/footer :: footer"></footer>
 </div>
+
+<script>
+    (() => {
+    	const calendarContainer = document.getElementById('calendar-container')
+    	fetch('/bookings')
+            .then(res => res.text())
+            .then(html => calendarContainer.innerHTML = html)
+            .catch(e => console.error(e));
+    })()
+</script>
 </body>
 </html>
