@@ -113,20 +113,24 @@
 <script th:inline="javascript">
 	(() => {
 		const calendarContainer = document.getElementById('calendar-container');
+		const propertySelect = document.getElementById('property');
+		let property = /*[[${property}]]*/ "";
 
 		fetchBookings()
+
+        propertySelect.addEventListener('change', (e) => {
+            property = e.target.value;
+            fetchBookings();
+        });
 
 		calendarContainer.addEventListener('click', (e) => {
             if (!e.target.classList.contains('calendar-control')) return;
             const month = e.target.getAttribute('data-month');
 			const year = e.target.getAttribute('data-year');
-            const urlParams = new URLSearchParams();
-            urlParams.append('month', month)
-            urlParams.append('year', year)
-            fetchBookings(`/bookings?${urlParams.toString()}`)
+            fetchBookings(`/bookings?property=${property}&year=${year}&month=${month}`);
 		});
 
-		function fetchBookings(url = '/bookings') {
+		function fetchBookings(url = `/bookings?property=${property}`) {
 			fetch(url)
 				.then(res => res.text())
 				.then(html => calendarContainer.innerHTML = html)
