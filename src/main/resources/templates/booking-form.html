@@ -47,6 +47,7 @@
                     <div class="form-field form-field_required">
                         <label for="departureDate" th:text="#{bookingForm.departureDate}"></label>
                         <input type="date" class="form-input" id="departureDate" name="departureDate" required>
+                        <span class="form-field-error form-field-error__hidden">Departure date cannot be before arrival date.</span>
                     </div>
                 </div>
 
@@ -114,6 +115,10 @@
 	(() => {
 		const calendarContainer = document.getElementById('calendar-container');
 		const propertySelect = document.getElementById('property');
+		const arrivalDate = document.getElementById('arrivalDate');
+		const departureDate = document.getElementById('departureDate');
+		const departureDateError = document.querySelector('.form-field-error');
+		const form = document.querySelector('form');
 		let property = /*[[${property}]]*/ "";
 
 		fetchBookings()
@@ -130,11 +135,30 @@
             fetchBookings(`/bookings?property=${property}&year=${year}&month=${month}`);
 		});
 
+		departureDate.addEventListener('change', validateDates)
+		arrivalDate.addEventListener('change', validateDates)
+        form.addEventListener('submit', (e) => {
+        	if (arrivalDate.value > departureDate.value) {
+        		e.preventDefault();
+            }
+        })
+
 		function fetchBookings(url = `/bookings?property=${property}`) {
 			fetch(url)
 				.then(res => res.text())
 				.then(html => calendarContainer.innerHTML = html)
 				.catch(e => console.error(e));
+		}
+
+		function validateDates() {
+			if (!arrivalDate.value || !departureDate.value) return false;
+            if (arrivalDate.value > departureDate.value) {
+				departureDateError.classList.toggle('form-field-error__hidden', false)
+                return false;
+            } else {
+				departureDateError.classList.toggle('form-field-error__hidden', true)
+				return true;
+            }
 		}
 	})()
 </script>

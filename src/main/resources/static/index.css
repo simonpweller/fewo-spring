@@ -317,6 +317,15 @@ footer .linkList {
     flex-direction: column;
 }
 
+.form-field-error {
+    color: #c6082b;
+    font-weight: bold;
+}
+
+.form-field-error__hidden {
+    display: none;
+}
+
 .form-field_required label::after {
     content: '*';
 }
