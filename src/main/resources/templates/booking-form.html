@@ -19,7 +19,7 @@
             <div id="calendar-container">
 
             </div>
-            <form action="/bookings" method="post">
+            <form action="/buchungen" method="post">
                 <div class="form-row">
                     <div class="form-field form-field_required">
                         <label for="property" th:text="#{bookingForm.property}"></label>
@@ -132,7 +132,7 @@
             if (!e.target.classList.contains('calendar-control')) return;
             const month = e.target.getAttribute('data-month');
 			const year = e.target.getAttribute('data-year');
-            fetchBookings(`/bookings?property=${property}&year=${year}&month=${month}`);
+            fetchBookings(`/buchungen?property=${property}&year=${year}&month=${month}`);
 		});
 
 		departureDate.addEventListener('change', validateDates)
@@ -143,7 +143,7 @@
             }
         })
 
-		function fetchBookings(url = `/bookings?property=${property}`) {
+		function fetchBookings(url = `/buchungen?property=${property}`) {
 			fetch(url)
 				.then(res => res.text())
 				.then(html => calendarContainer.innerHTML = html)

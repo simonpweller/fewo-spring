@@ -13,14 +13,14 @@
         <div class="innerWrapper">
             <ul class="linkList">
                 <li>
-                    <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/imprint' ? ' link_active' : ''}"
-                       href="/imprint"
+                    <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/impressum' ? ' link_active' : ''}"
+                       href="/impressum"
                        th:text="#{imprint}"
                     ></a>
                 </li>
                 <li>
-                    <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/privacy' ? ' link_active' : ''}"
-                       href="/privacy"
+                    <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/datenschutz' ? ' link_active' : ''}"
+                       href="/datenschutz"
                        th:text="#{privacy}"
                     ></a>
                 </li>

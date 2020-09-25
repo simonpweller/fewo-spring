@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 @Controller
-@RequestMapping("/bookings")
+@RequestMapping("/buchungen")
 class BookingController(
         val bookingService: BookingService,
 ) {
@@ -21,7 +21,7 @@ class BookingController(
         redirectAttributes.addFlashAttribute("isBungalow", booking.property == Property.BUNGALOW)
         redirectAttributes.addFlashAttribute("arrivalDate", booking.arrivalDate.format(dateTimeFormatter))
         redirectAttributes.addFlashAttribute("departureDate", booking.departureDate.format(dateTimeFormatter))
-        return "redirect:/booking-confirmation"
+        return "redirect:/buchungsbestaetigung"
     }
 
     @GetMapping

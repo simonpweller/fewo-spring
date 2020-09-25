@@ -13,7 +13,7 @@ import java.util.*
 class LocalizationConfig: WebMvcConfigurer {
     @Bean fun localeResolver(): LocaleResolver {
         val localeResolver = CookieLocaleResolver()
-        localeResolver.setDefaultLocale(Locale.ENGLISH)
+        localeResolver.setDefaultLocale(Locale.GERMAN)
         return localeResolver
     }
 

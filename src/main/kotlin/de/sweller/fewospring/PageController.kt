@@ -16,30 +16,30 @@ class PageController {
     @GetMapping("/")
     fun getHome() = "index"
 
-    @GetMapping("/booking-form")
-    fun getBookingForm(@RequestParam property: String?, model: Model): String {
-        model.addAttribute(if (property == "bungalow") Property.BUNGALOW else Property.APARTMENT)
+    @GetMapping("/buchen")
+    fun getBookingForm(@RequestParam unterkunft: String?, model: Model): String {
+        model.addAttribute(if (unterkunft == "ferienhaus") Property.BUNGALOW else Property.APARTMENT)
         return "booking-form"
     }
 
-    @GetMapping("/booking-confirmation")
+    @GetMapping("/buchungsbestaetigung")
     fun getBookingConfirmation() = "booking-confirmation"
 
-    @GetMapping("/directions")
+    @GetMapping("/anfahrt")
     fun getDirections(model: Model): String {
         model.addAttribute("mapboxKey", mapboxKey)
         return "directions"
     }
 
-    @GetMapping("/apartment")
+    @GetMapping("/ferienwohnung")
     fun getApartmentDetail() = "apartment"
 
-    @GetMapping("/bungalow")
+    @GetMapping("/ferienhaus")
     fun getBungalowDetail() = "bungalow"
 
-    @GetMapping("/imprint")
+    @GetMapping("/impressum")
     fun getImprint() = "imprint"
 
-    @GetMapping("/privacy")
+    @GetMapping("/datenschutz")
     fun getPrivacy() = "privacy"
 }

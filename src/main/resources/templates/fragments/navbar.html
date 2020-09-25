@@ -25,26 +25,26 @@
             <nav>
                 <ul class="linkList navItems">
                     <li>
-                        <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/apartment' ? ' link_active' : ''}"
-                           href="/apartment"
+                        <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/ferienwohnung' ? ' link_active' : ''}"
+                           href="/ferienwohnung"
                            th:text="#{apartment}"
                         ></a>
                     </li>
                     <li>
-                        <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/bungalow' ? ' link_active' : ''}"
-                           href="/bungalow"
+                        <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/ferienhaus' ? ' link_active' : ''}"
+                           href="/ferienhaus"
                            th:text="#{bungalow}"
                         ></a>
                     </li>
                     <li>
-                        <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/booking-form' ? ' link_active' : ''}"
-                           href="/booking-form"
+                        <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/buchen' ? ' link_active' : ''}"
+                           href="/buchen"
                            th:text="#{bookingForm}"
                         ></a>
                     </li>
                     <li>
-                        <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/directions' ? ' link_active' : ''}"
-                           href="/directions"
+                        <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/anfahrt' ? ' link_active' : ''}"
+                           href="/anfahrt"
                            th:text="#{directions}"
                         ></a>
                     </li>
