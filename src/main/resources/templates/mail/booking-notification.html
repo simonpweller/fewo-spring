@@ -2,17 +2,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>New Booking Request</title>
+    <title th:text="#{notification.bookingRequest}"></title>
 </head>
 <body>
-    <h1>New Booking Request</h1>
+    <h1 th:text="#{notification.bookingRequest}"></h1>
 
-    <p>A visitor made a new booking request</p>
-    <p><strong>Name</strong>: <span th:text="${booking.firstName}"> </span><span th:text="${booking.lastName}"></span></p>
-    <p><strong>Address</strong>: <span th:text="${booking.streetLine}"></span><span th:if="${booking.streetLine != null}">, </span><span th:text="|${booking.zipCode} ${booking.city}|"></span></p>
-    <p><strong>Requested dates</strong>: <span th:text="${booking.arrivalDate}"></span> - <span th:text="${booking.departureDate}"></span></p>
-    <p><strong>Email</strong>: <span th:text="${booking.email}"></span></p>
-    <p><strong>Phone number</strong>: <span th:text="${booking.phoneNumber}"></span></p>
-    <p><strong>Comments</strong>: <span th:text="${booking.comments}"></span></p>
+    <p th:text="#{notification.bookingRequestMade}"></p>
+    <p><strong th:text="#{bookingForm.property}"></strong>: <span th:text="${isBungalow} ? #{bungalow} : #{apartment}"></span></p>
+    <p><strong th:text="#{fullName}"></strong>: <span th:text="${booking.firstName}"> </span><span th:text="${booking.lastName}"></span></p>
+    <p><strong th:text="#{address}"></strong>: <span th:text="${booking.streetLine}"></span><span th:if="${hasFullAddress}">, </span><span th:text="|${booking.zipCode} ${booking.city}|"></span></p>
+    <p><strong th:text="#{dates}"></strong>: <span th:text="${booking.arrivalDate}"></span> - <span th:text="${booking.departureDate}"></span></p>
+    <p><strong th:text="#{bookingForm.email}"></strong>: <span th:text="${booking.email}"></span></p>
+    <p><strong th:text="#{bookingForm.phoneNumber}"></strong>: <span th:text="${booking.phoneNumber}"></span></p>
+    <p><strong th:text="#{bookingForm.comments}"></strong>: <span th:text="${booking.comments}"></span></p>
 </body>
 </html>

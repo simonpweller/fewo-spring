@@ -15,56 +15,67 @@ import java.util.*
 
 @Service
 class EmailService(
-        val mailSender: JavaMailSender,
-        val messageSource: MessageSource,
-        val emailTemplateEngine: SpringTemplateEngine,
+    val mailSender: JavaMailSender,
+    val messageSource: MessageSource,
+    val emailTemplateEngine: SpringTemplateEngine,
 ) {
 
     @Value("\${spring.mail.username}")
     lateinit var adminMail: String
 
     fun sendRequestConfirmationMail(booking: Booking) {
-        val dateTimeFormatter = DateTimeFormatter.ofPattern(if (booking.locale == Locale.ENGLISH) "dd/MM/yyyy" else "dd.MM.yyyy")
+        val dateTimeFormatter =
+            DateTimeFormatter.ofPattern(if (booking.locale == Locale.ENGLISH) "dd/MM/yyyy" else "dd.MM.yyyy")
         sendTemplatedMessage(
-                to = booking.email,
-                locale = booking.locale,
-                subject = messageSource.getMessage("bookingRequest", null, booking.locale),
-                template = "mail/booking-request-confirmation",
-                templateModel = mapOf(
-                        "isBungalow" to (booking.property == Property.BUNGALOW),
-                        "arrivalDate" to booking.arrivalDate.format(dateTimeFormatter),
-                        "departureDate" to booking.departureDate.format(dateTimeFormatter),
-                )
+            to = booking.email,
+            locale = booking.locale,
+            subject = messageSource.getMessage("bookingRequest", null, booking.locale),
+            template = "mail/booking-request-confirmation",
+            templateModel = mapOf(
+                "isBungalow" to (booking.property == Property.BUNGALOW),
+                "arrivalDate" to booking.arrivalDate.format(dateTimeFormatter),
+                "departureDate" to booking.departureDate.format(dateTimeFormatter),
+            )
         )
     }
 
     fun sendRequestNotificationMail(booking: Booking) {
         sendTemplatedMessage(
-                to = adminMail,
-                locale = Locale.ENGLISH,
-                subject = "New Booking Request",
-                template = "mail/booking-notification",
-                templateModel = mapOf("booking" to booking),
+            to = adminMail,
+            locale = Locale.GERMAN,
+            subject = messageSource.getMessage("notification.bookingRequest", null, Locale.GERMAN),
+            template = "mail/booking-notification",
+            templateModel = mapOf(
+                "isBungalow" to (booking.property == Property.BUNGALOW),
+                "hasFullAddress" to (booking.streetLine.isNotBlank() && (booking.city.isNotBlank() || booking.zipCode.isNotBlank())),
+                "booking" to booking
+            ),
         )
-
     }
 
     fun sendConfirmationMail(booking: Booking) {
-        val dateTimeFormatter = DateTimeFormatter.ofPattern(if (booking.locale == Locale.ENGLISH) "dd/MM/yyyy" else "dd.MM.yyyy")
+        val dateTimeFormatter =
+            DateTimeFormatter.ofPattern(if (booking.locale == Locale.ENGLISH) "dd/MM/yyyy" else "dd.MM.yyyy")
         sendTemplatedMessage(
-                to = booking.email,
-                locale = booking.locale,
-                subject = messageSource.getMessage("bookingConfirmation.subject", null, booking.locale),
-                template = "mail/booking-confirmation",
-                templateModel = mapOf(
-                        "isBungalow" to (booking.property == Property.BUNGALOW),
-                        "arrivalDate" to booking.arrivalDate.format(dateTimeFormatter),
-                        "departureDate" to booking.departureDate.format(dateTimeFormatter),
-                )
+            to = booking.email,
+            locale = booking.locale,
+            subject = messageSource.getMessage("bookingConfirmation.subject", null, booking.locale),
+            template = "mail/booking-confirmation",
+            templateModel = mapOf(
+                "isBungalow" to (booking.property == Property.BUNGALOW),
+                "arrivalDate" to booking.arrivalDate.format(dateTimeFormatter),
+                "departureDate" to booking.departureDate.format(dateTimeFormatter),
+            )
         )
     }
 
-    private fun sendTemplatedMessage(to: String, subject: String, template: String, templateModel: Map<String, Any>? = emptyMap(), locale: Locale) {
+    private fun sendTemplatedMessage(
+        to: String,
+        subject: String,
+        template: String,
+        templateModel: Map<String, Any>? = emptyMap(),
+        locale: Locale
+    ) {
         val context = Context(locale, templateModel)
         val htmlBody = emailTemplateEngine.process(template, context)
         sendHtmlMessage(to, subject, htmlBody)
