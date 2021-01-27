@@ -360,8 +360,16 @@ footer .linkList {
     outline: 0;
 }
 
+#calendar-container {
+    height: 334px;
+}
+
 .calendar {
     display: inline-block;
+}
+
+.calendar table {
+    height: 198px;
 }
 
 .calendar th {
