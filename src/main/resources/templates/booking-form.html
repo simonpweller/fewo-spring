@@ -42,12 +42,15 @@
                     <div class="form-field form-field_required">
                         <label for="arrivalDate" th:text="#{bookingForm.arrivalDate}"></label>
                         <input type="date" class="form-input" id="arrivalDate" name="arrivalDate" required>
+                        <span class="form-field-error form-field-error__hidden"
+                              th:text="#{bookingForm.errors.arrivalInThePast}"></span>
                     </div>
 
                     <div class="form-field form-field_required">
                         <label for="departureDate" th:text="#{bookingForm.departureDate}"></label>
                         <input type="date" class="form-input" id="departureDate" name="departureDate" required>
-                        <span class="form-field-error form-field-error__hidden">Departure date cannot be before arrival date.</span>
+                        <span class="form-field-error form-field-error__hidden"
+                              th:text="#{bookingForm.errors.dateOrder}"></span>
                     </div>
                 </div>
 
@@ -117,31 +120,32 @@
 		const propertySelect = document.getElementById('property');
 		const arrivalDate = document.getElementById('arrivalDate');
 		const departureDate = document.getElementById('departureDate');
-		const departureDateError = document.querySelector('.form-field-error');
+		const arrivalDateError = document.querySelector('#arrivalDate + .form-field-error');
+		const departureDateError = document.querySelector('#departureDate + .form-field-error');
 		const form = document.querySelector('form');
 		let property = /*[[${property}]]*/ "";
 
 		fetchBookings()
 
-        propertySelect.addEventListener('change', (e) => {
-            property = e.target.value;
-            fetchBookings();
-        });
+		propertySelect.addEventListener('change', (e) => {
+			property = e.target.value;
+			fetchBookings();
+		});
 
 		calendarContainer.addEventListener('click', (e) => {
-            if (!e.target.classList.contains('calendar-control')) return;
-            const month = e.target.getAttribute('data-month');
+			if (!e.target.classList.contains('calendar-control')) return;
+			const month = e.target.getAttribute('data-month');
 			const year = e.target.getAttribute('data-year');
-            fetchBookings(`/buchungen?property=${property}&year=${year}&month=${month}`);
+			fetchBookings(`/buchungen?property=${property}&year=${year}&month=${month}`);
 		});
 
 		departureDate.addEventListener('change', validateDates)
 		arrivalDate.addEventListener('change', validateDates)
-        form.addEventListener('submit', (e) => {
-        	if (arrivalDate.value > departureDate.value) {
-        		e.preventDefault();
-            }
-        })
+		form.addEventListener('submit', (e) => {
+			if (!validateDates()) {
+				e.preventDefault();
+			}
+		})
 
 		function fetchBookings(url = `/buchungen?property=${property}`) {
 			fetch(url)
@@ -152,13 +156,20 @@
 
 		function validateDates() {
 			if (!arrivalDate.value || !departureDate.value) return false;
-            if (arrivalDate.value > departureDate.value) {
-				departureDateError.classList.toggle('form-field-error__hidden', false)
-                return false;
-            } else {
-				departureDateError.classList.toggle('form-field-error__hidden', true)
-				return true;
-            }
+			const validArrivalDate = arrivalDate.value >= today();
+			const validDateOrder = arrivalDate.value <= departureDate.value;
+			arrivalDateError.classList.toggle('form-field-error__hidden', validArrivalDate);
+			departureDateError.classList.toggle('form-field-error__hidden', validDateOrder);
+			return validArrivalDate && validDateOrder;
+		}
+
+		function today() {
+			const date = new Date();
+			return [
+				date.getFullYear(),
+				('0' + (date.getMonth() + 1)).slice(-2),
+				('0' + date.getDate()).slice(-2),
+			].join('-');
 		}
 	})()
 </script>
