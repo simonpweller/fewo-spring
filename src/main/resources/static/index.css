@@ -177,23 +177,24 @@ main {
 .accommodations-overlay {
     color: #eee;
     background-color: #1E412B;
-
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 48px;
-    transition: .5s ease;
+    height: 82px;
+    overflow: auto;
 }
 
-@media (max-width: 756px) {
+@media only screen and (min-width: 992px) {
     .accommodations-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 48px;
+        transition: .5s ease;
+        overflow: visible;
+    }
+
+    .accommodations-tile:hover .accommodations-overlay {
         height: 82px;
     }
-}
-
-.accommodations-tile:hover .accommodations-overlay {
-    height: 82px;
 }
 
 .accommodations-overlay-title {
