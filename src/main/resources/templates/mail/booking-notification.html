@@ -12,7 +12,7 @@
     <p><strong th:text="#{fullName}"></strong>: <span th:text="${booking.firstName}"> </span><span th:text="${booking.lastName}"></span></p>
     <p><strong th:text="#{address}"></strong>: <span th:text="${booking.streetLine}"></span><span th:if="${hasFullAddress}">, </span><span th:text="|${booking.zipCode} ${booking.city}|"></span></p>
     <p><strong th:text="#{dates}"></strong>: <span th:text="${booking.arrivalDate}"></span> - <span th:text="${booking.departureDate}"></span></p>
-    <p><strong th:text="#{bookingForm.email}"></strong>: <span th:text="${booking.email}"></span></p>
+    <p><strong th:text="#{bookingForm.email}"></strong>: <a th:href="|mailto:${booking.email}|" th:text="${booking.email}"></a></p>
     <p><strong th:text="#{bookingForm.phoneNumber}"></strong>: <span th:text="${booking.phoneNumber}"></span></p>
     <p><strong th:text="#{bookingForm.comments}"></strong>: <span th:text="${booking.comments}"></span></p>
 </body>
