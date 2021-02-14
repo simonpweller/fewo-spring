@@ -30,6 +30,8 @@
                 <a href="/ferienwohnung" class="accommodations-link">
                     <div class="pops accommodations-tile">
                         <img
+                                width="580"
+                                height="325"
                                 class="accommodations-img"
                                 th:src="@{images/FW-600.jpg}"
                                 th:attr="srcset=@{/images/FW-600.jpg} + ' 600w, ' + @{/images/FW-400.jpg} + ' 400w'"
@@ -37,7 +39,7 @@
                                 sizes="(max-width: 756px) 100vw, (max-width: 1200px) 50vw, 600px"
                         />
                         <div class="accommodations-overlay">
-                            <h3 class="accommodations-overlay-title" th:text="#{apartment}"></h3>
+                            <h2 class="h3 accommodations-overlay-title" th:text="#{apartment}"></h2>
                             <div class="accommodations-overlay-subtitle">
                                 <div th:text="#{apartment.numberOfPeople}"></div>
                                 <div th:text="#{apartment.startingPrice}"></div>
@@ -48,6 +50,8 @@
                 <a href="/ferienhaus" class="accommodations-link">
                     <div class="pops accommodations-tile">
                         <img
+                                width="580"
+                                height="325"
                                 class="accommodations-img"
                                 th:src="@{images/FH-600.jpg}"
                                 th:attr="srcset=@{/images/FH-600.jpg} + ' 600w, ' + @{/images/FH-400.jpg} + ' 400w'"
@@ -55,7 +59,7 @@
                                 sizes="(max-width: 756px) 100vw, (max-width: 1200px) 50vw, 600px"
                         />
                         <div class="accommodations-overlay">
-                            <h3 class="accommodations-overlay-title" th:text="#{bungalow}"></h3>
+                            <h2 class="h3 accommodations-overlay-title" th:text="#{bungalow}"></h2>
                             <div class="accommodations-overlay-subtitle">
                                 <div th:text="#{bungalow.numberOfPeople}"></div>
                                 <div th:text="#{bungalow.startingPrice}"></div>

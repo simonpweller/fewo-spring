@@ -2,8 +2,19 @@
     box-sizing: border-box;
 }
 
-h1, h2 {
+h1 {
+    font-size: 2em;
     font-family: 'Kalam', sans-serif;
+}
+
+h2 {
+    font-size: 1.5em;
+    font-family: 'Kalam', sans-serif;
+}
+
+h3, .h3 {
+    font-size: 1.17em;
+    font-family: sans-serif;
 }
 
 body {
@@ -181,6 +192,16 @@ main {
     overflow: auto;
 }
 
+.accommodations-overlay-title {
+    margin: 10px;
+}
+
+.accommodations-overlay-subtitle {
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
 @media only screen and (min-width: 992px) {
     .accommodations-overlay {
         position: absolute;
@@ -192,19 +213,17 @@ main {
         overflow: visible;
     }
 
+    .accommodations-overlay-subtitle {
+        display: none;
+    }
+
     .accommodations-tile:hover .accommodations-overlay {
         height: 82px;
     }
-}
 
-.accommodations-overlay-title {
-    margin: 10px;
-}
-
-.accommodations-overlay-subtitle {
-    margin: 10px;
-    display: flex;
-    justify-content: space-between;
+    .accommodations-tile:hover .accommodations-overlay-subtitle {
+        display: flex;
+    }
 }
 
 .footer {
