@@ -423,3 +423,7 @@ footer .linkList {
     display: flex;
     justify-content: space-between;
 }
+
+.calendar-controls button:only-child {
+    margin-left: auto;
+}

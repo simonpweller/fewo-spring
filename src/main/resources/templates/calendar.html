@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="de" th:lang="${#locale}" xmlns:th="http://www.thymeleaf.org">
 <div class="calendar">
-    <h2 th:text="${#temporals.format(availability.yearMonth, 'MMMM YYYY', 'UTC')}"></h2>
+    <h2 th:text="${currentYearMonth}"></h2>
     <table>
         <thead>
         <tr>
@@ -47,15 +47,16 @@
     </table>
     <div class="calendar-controls">
         <button
+                th:if="${showPreviousMonth}"
                 class="button calendar-control"
                 id="calendar-prev"
-                th:text="${#temporals.format(availability.yearMonth.minusMonths(1), 'MMMM YYYY')}"
+                th:text="${previousYearMonth}"
                 th:attr="data-month=${availability.yearMonth.minusMonths(1).monthValue}, data-year=${availability.yearMonth.minusMonths(1).year}"
         ></button>
         <button
                 class="button calendar-control"
                 id="calendar-next"
-                th:text="${#temporals.format(availability.yearMonth.plusMonths(1), 'MMMM YYYY')}"
+                th:text="${nextYearMonth}"
                 th:attr="data-month=${availability.yearMonth.plusMonths(1).monthValue}, data-year=${availability.yearMonth.plusMonths(1).year}"
         ></button>
     </div>
