@@ -144,7 +144,7 @@
 			if (!validateDates()) {
 				e.preventDefault();
 			}
-		})
+		});
 
 		function fetchBookings(url = `/buchungen?property=${property}`) {
 			fetch(url)
