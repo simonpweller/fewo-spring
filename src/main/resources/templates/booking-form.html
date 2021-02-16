@@ -15,9 +15,6 @@
     <main>
         <div class="container">
             <h1 th:text="#{bookNow}"></h1>
-            <div id="calendar-container">
-
-            </div>
             <form action="/buchungen" method="post">
                 <div class="form-row">
                     <div class="form-field form-field_required">
@@ -36,6 +33,8 @@
                         </select>
                     </div>
                 </div>
+
+                <div id="calendar-container"></div>
 
                 <div class="form-row">
                     <div class="form-field form-field_required">

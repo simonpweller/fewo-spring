@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="de" th:lang="${#locale}" xmlns:th="http://www.thymeleaf.org">
 <div class="calendar">
-    <h2 th:text="${currentYearMonth}"></h2>
+    <h2 th:text="#{availability} + ': ' + ${currentYearMonth}"></h2>
     <table>
         <thead>
         <tr>

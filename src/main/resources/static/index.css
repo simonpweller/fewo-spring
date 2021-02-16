@@ -382,10 +382,12 @@ footer .linkList {
 
 #calendar-container {
     height: 334px;
+    display: flex;
 }
 
 .calendar {
     display: inline-block;
+    margin: auto;
 }
 
 .calendar table {
