@@ -47,6 +47,7 @@
     </table>
     <div class="calendar-controls">
         <button
+                type="button"
                 th:if="${showPreviousMonth}"
                 class="button calendar-control"
                 id="calendar-prev"
@@ -54,6 +55,7 @@
                 th:attr="data-month=${availability.yearMonth.minusMonths(1).monthValue}, data-year=${availability.yearMonth.minusMonths(1).year}"
         ></button>
         <button
+                type="button"
                 class="button calendar-control"
                 id="calendar-next"
                 th:text="${nextYearMonth}"
