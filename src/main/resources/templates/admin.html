@@ -15,6 +15,7 @@
         <thead>
         <tr>
             <th scope="col">Unterkunft</th>
+            <th scope="col">Personen</th>
             <th scope="col">Name</th>
             <th scope="col">Adresse</th>
             <th scope="col">E-Mail</th>
@@ -28,6 +29,7 @@
         <tbody>
         <tr th:each="booking : ${bookings}">
             <td th:text="${booking.property.displayValue}"></td>
+            <td th:text="${booking.numberOfAdults} + '+' + ${booking.numberOfChildren}"></td>
             <td th:text="${booking.firstName} + ' ' + ${booking.lastName}"></td>
             <td>
                 <div th:text="${booking.streetLine}"></div>

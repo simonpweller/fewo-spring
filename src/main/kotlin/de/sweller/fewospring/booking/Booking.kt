@@ -11,6 +11,8 @@ interface BookingRepository: CrudRepository<Booking, Long> {
 
 @Entity
 class Booking(
+        var numberOfAdults: Int,
+        var numberOfChildren: Int,
         var firstName: String,
         var lastName: String,
         var streetLine: String,

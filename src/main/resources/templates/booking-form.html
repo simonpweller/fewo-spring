@@ -54,6 +54,18 @@
 
                 <div class="form-row">
                     <div class="form-field form-field_required">
+                        <label for="numberOfAdults" th:text="#{bookingForm.numberOfAdults}"></label>
+                        <input type="number" class="form-input" step="1" min="1" max="5" id="numberOfAdults" name="numberOfAdults" th:value="1" required>
+                    </div>
+
+                    <div class="form-field form-field_required">
+                        <label for="numberOfChildren" th:text="#{bookingForm.numberOfChildren}"></label>
+                        <input type="number" class="form-input" step="1" min="0" max="5" id="numberOfChildren" name="numberOfChildren" th:value="0" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-field form-field_required">
                         <label for="firstName" th:text="#{bookingForm.firstName}"></label>
                         <input type="text" class="form-input" id="firstName" name="firstName" required>
                     </div>
