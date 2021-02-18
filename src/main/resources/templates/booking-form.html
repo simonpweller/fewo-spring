@@ -16,6 +16,9 @@
         <div class="container">
             <h1 th:text="#{bookNow}"></h1>
             <form action="/buchungen" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                <input type="hidden" th:name="locale" th:value="${#locale}"/>
+
                 <div class="form-row">
                     <div class="form-field form-field_required">
                         <label for="property" th:text="#{bookingForm.property}"></label>
@@ -31,6 +34,12 @@
                                     th:selected="${property == T(de.sweller.fewospring.booking.Property).BUNGALOW}"
                             ></option>
                         </select>
+                    </div>
+                    <div id="secondBedroomFormField" class="form-field form-field__checkbox" th:classappend="${property == T(de.sweller.fewospring.booking.Property).BUNGALOW} ? '' : 'hidden'">
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" class="form-input" id="secondBedroom" name="secondBedroom">
+                            <label for="secondBedroom" th:text="#{bookingForm.secondBedroom}"></label>
+                        </div>
                     </div>
                 </div>
 
@@ -113,9 +122,6 @@
                     </div>
                 </div>
 
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                <input type="hidden" th:name="locale" th:value="${#locale}"/>
-
                 <button type="submit" class="button" th:text="#{bookingForm.submit}"></button>
             </form>
         </div>
@@ -128,7 +134,11 @@
 	(() => {
 		const calendarContainer = document.getElementById('calendar-container');
 		const propertySelect = document.getElementById('property');
+		const secondBedroomFormField = document.getElementById('secondBedroomFormField');
+        const secondBedroom = document.getElementById('secondBedroom');
 		const arrivalDate = document.getElementById('arrivalDate');
+		const numberOfAdults = document.getElementById('numberOfAdults');
+		const numberOfChildren = document.getElementById('numberOfChildren');
 		const departureDate = document.getElementById('departureDate');
 		const arrivalDateError = document.querySelector('#arrivalDate + .form-field-error');
 		const departureDateError = document.querySelector('#departureDate + .form-field-error');
@@ -139,8 +149,12 @@
 
 		propertySelect.addEventListener('change', (e) => {
 			property = e.target.value;
+			updateSecondBedroom();
 			fetchBookings();
 		});
+
+		numberOfAdults.addEventListener('change', updateSecondBedroom);
+		numberOfChildren.addEventListener('change', updateSecondBedroom);
 
 		calendarContainer.addEventListener('click', (e) => {
 			if (!e.target.classList.contains('calendar-control')) return;
@@ -163,6 +177,25 @@
 				.then(html => calendarContainer.innerHTML = html)
 				.catch(e => console.error(e));
 		}
+
+		function updateSecondBedroom() {
+			secondBedroomFormField.classList.toggle('hidden', isApartmentSelected());
+			if (isApartmentSelected()) {
+				secondBedroom.checked = false;
+			} else {
+                const totalPeople = Number(numberOfAdults.value) + Number(numberOfChildren.value);
+                if (totalPeople > 3) {
+                    secondBedroom.checked = true;
+                    secondBedroom.disabled = true;
+                } else {
+                    secondBedroom.disabled = false;
+                }
+            }
+        }
+
+        function isApartmentSelected() {
+			return propertySelect.value === 'APARTMENT';
+        }
 
 		function validateDates() {
 			if (!arrivalDate.value || !departureDate.value) return false;

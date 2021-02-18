@@ -11,8 +11,6 @@ interface BookingRepository: CrudRepository<Booking, Long> {
 
 @Entity
 class Booking(
-        var numberOfAdults: Int,
-        var numberOfChildren: Int,
         var firstName: String,
         var lastName: String,
         var streetLine: String,
@@ -23,6 +21,9 @@ class Booking(
         var arrivalDate: LocalDate,
         var departureDate: LocalDate,
         @Enumerated(EnumType.STRING) var property: Property,
+        var numberOfAdults: Int,
+        var numberOfChildren: Int,
+        var secondBedroom: Boolean,
         @Column(columnDefinition="TEXT") var comments: String,
         var confirmed: Boolean = false,
         var locale: Locale,

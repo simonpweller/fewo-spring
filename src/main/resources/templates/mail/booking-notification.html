@@ -11,6 +11,7 @@
     <p><strong th:text="#{bookingForm.property}"></strong>: <span th:text="${isBungalow} ? #{bungalow} : #{apartment}"></span></p>
     <p><strong th:text="#{bookingForm.numberOfAdults}"></strong>: <span th:text="${booking.numberOfAdults}"></span></p>
     <p><strong th:text="#{bookingForm.numberOfChildren}"></strong>: <span th:text="${booking.numberOfChildren}"></span></p>
+    <p th:if="${booking.secondBedroom == true}" th:text="#{bookingForm.secondBedroom}"></p>
     <p><strong th:text="#{fullName}"></strong>: <span th:text="${booking.firstName}"></span> <span th:text="${booking.lastName}"></span></p>
     <p><strong th:text="#{address}"></strong>: <span th:text="${booking.streetLine}"></span><span th:if="${hasFullAddress}">, </span><span th:text="|${booking.zipCode} ${booking.city}|"></span></p>
     <p><strong th:text="#{dates}"></strong>: <span th:text="${booking.arrivalDate}"></span> - <span th:text="${booking.departureDate}"></span></p>

@@ -337,6 +337,31 @@ footer .linkList {
     flex-direction: column;
 }
 
+.form-field__checkbox {
+    justify-content: flex-end;
+}
+
+.checkbox-wrapper {
+    height: 31px;
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-wrapper input {
+    margin-right: 10px;
+}
+
+.hidden {
+    visibility: hidden;
+    display: none;
+}
+
+@media only screen and (min-width: 768px) {
+    .hidden {
+        display: flex;
+    }
+}
+
 .form-field-error {
     color: #c6082b;
     font-weight: bold;
