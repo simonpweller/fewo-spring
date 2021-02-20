@@ -1,0 +1,22 @@
+{
+  "name": "fewo-spring",
+  "version": "1.0.0",
+  "description": "...",
+  "main": "index.js",
+  "scripts": {
+    "build": "parcel build --public-url ./ -d src/main/resources/static/dist src/main/resources/js/booking-form.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simonpweller/fewo-spring.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/simonpweller/fewo-spring/issues"
+  },
+  "homepage": "https://github.com/simonpweller/fewo-spring#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}

@@ -1,8 +1,10 @@
+import com.github.gradle.node.npm.task.NpmTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("org.springframework.boot") version "2.3.3.RELEASE"
     id("io.spring.dependency-management") version "1.0.10.RELEASE"
+    id("com.github.node-gradle.node") version "3.0.1"
     kotlin("jvm") version "1.4.0"
     kotlin("plugin.spring") version "1.4.0"
     kotlin("plugin.jpa") version "1.4.0"
@@ -49,4 +51,13 @@ tasks.withType<KotlinCompile> {
         freeCompilerArgs = listOf("-Xjsr305=strict")
         jvmTarget = "1.8"
     }
+}
+
+val npmTask = tasks.register<NpmTask>("bundle") {
+    dependsOn(tasks.npmInstall)
+    npmCommand.set(listOf("run", "build"))
+}
+
+tasks.compileKotlin {
+    dependsOn(npmTask)
 }
