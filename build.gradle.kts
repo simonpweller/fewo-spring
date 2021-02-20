@@ -42,6 +42,10 @@ dependencies {
     }
 }
 
+node {
+    download.set(true)
+}
+
 tasks.withType<Test> {
     useJUnitPlatform()
 }
