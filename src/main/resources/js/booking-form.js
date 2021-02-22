@@ -1,4 +1,4 @@
-import { calculatePrice } from './calculatePrice'
+import {calculatePrice} from './calculatePrice'
 import differenceInCalendarDays from 'date-fns/differenceInCalendarDays';
 
 const calendarContainer = document.getElementById('calendar-container');
@@ -11,6 +11,7 @@ const numberOfChildren = document.getElementById('numberOfChildren');
 const departureDate = document.getElementById('departureDate');
 const arrivalDateError = document.querySelector('#arrivalDate + .form-field-error');
 const departureDateError = document.querySelector('#departureDate + .form-field-error');
+const expectedPrice = document.getElementById('expectedPrice');
 const form = document.querySelector('form');
 
 fetchBookings()
@@ -94,7 +95,8 @@ function updatePrice() {
 	const isApartment = isApartmentSelected();
 
 	const numberOfNights = differenceInCalendarDays(to, from);
+	const people = adults + children;
 
-	const price = calculatePrice(numberOfNights, adults, children, extraBedroom, isApartment);
-	console.log(price);
+	const isInvalid = isNaN(numberOfNights) || adults < 1 || (isApartment && (people < 1 || people > 3)) || (!isApartment && (people < 2 || people > 5));
+	expectedPrice.innerText = isInvalid ? '-' : calculatePrice(numberOfNights, adults, children, extraBedroom, isApartment) + '€';
 }
