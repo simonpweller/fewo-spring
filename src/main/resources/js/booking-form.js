@@ -1,3 +1,6 @@
+import { calculatePrice } from './calculatePrice'
+import differenceInCalendarDays from 'date-fns/differenceInCalendarDays';
+
 const calendarContainer = document.getElementById('calendar-container');
 const propertySelect = document.getElementById('property');
 const secondBedroomFormField = document.getElementById('secondBedroomFormField');
@@ -9,12 +12,10 @@ const departureDate = document.getElementById('departureDate');
 const arrivalDateError = document.querySelector('#arrivalDate + .form-field-error');
 const departureDateError = document.querySelector('#departureDate + .form-field-error');
 const form = document.querySelector('form');
-let property = document.querySelector('main').getAttribute('data-property');
 
 fetchBookings()
 
-propertySelect.addEventListener('change', (e) => {
-	property = e.target.value;
+propertySelect.addEventListener('change', () => {
 	updateSecondBedroom();
 	fetchBookings();
 });
@@ -24,6 +25,7 @@ numberOfChildren.addEventListener('change', updateSecondBedroom);
 
 calendarContainer.addEventListener('click', (e) => {
 	if (!e.target.classList.contains('calendar-control')) return;
+	const property = propertySelect.value;
 	const month = e.target.getAttribute('data-month');
 	const year = e.target.getAttribute('data-year');
 	fetchBookings(`/buchungen?property=${property}&year=${year}&month=${month}`);
@@ -37,7 +39,9 @@ form.addEventListener('submit', (e) => {
 	}
 });
 
-function fetchBookings(url = `/buchungen?property=${property}`) {
+form.addEventListener('change', updatePrice)
+
+function fetchBookings(url = `/buchungen?property=${propertySelect.value}`) {
 	fetch(url)
 		.then(res => res.text())
 		.then(html => calendarContainer.innerHTML = html)
@@ -79,4 +83,18 @@ function today() {
 		('0' + (date.getMonth() + 1)).slice(-2),
 		('0' + date.getDate()).slice(-2),
 	].join('-');
+}
+
+function updatePrice() {
+	const from = new Date(arrivalDate.value);
+	const to = new Date(departureDate.value);
+	const adults = Number(numberOfAdults.value);
+	const children = Number(numberOfChildren.value);
+	const extraBedroom = secondBedroom.checked;
+	const isApartment = isApartmentSelected();
+
+	const numberOfNights = differenceInCalendarDays(to, from);
+
+	const price = calculatePrice(numberOfNights, adults, children, extraBedroom, isApartment);
+	console.log(price);
 }

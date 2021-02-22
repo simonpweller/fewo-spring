@@ -12,7 +12,7 @@
 <div class="layout">
     <div th:replace="fragments/navbar :: navbar"></div>
 
-    <main th:attr="data-property=${property}">
+    <main>
         <div class="container">
             <h1 th:text="#{bookNow}"></h1>
             <form action="/buchungen" method="post">

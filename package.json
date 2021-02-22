@@ -4,7 +4,8 @@
   "description": "...",
   "main": "index.js",
   "scripts": {
-    "build": "parcel build --public-url ./ -d src/main/resources/static/dist src/main/resources/js/booking-form.js"
+    "build": "parcel build --public-url ./ -d src/main/resources/static/dist src/main/resources/js/booking-form.js",
+    "test": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,11 @@
   },
   "homepage": "https://github.com/simonpweller/fewo-spring#readme",
   "devDependencies": {
+    "babel-jest": "^26.6.3",
+    "jest": "^26.6.3",
     "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "date-fns": "^2.17.0"
   }
 }
