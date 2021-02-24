@@ -49,15 +49,14 @@
                     <div class="form-field form-field_required">
                         <label for="arrivalDate" th:text="#{bookingForm.arrivalDate}"></label>
                         <input type="date" class="form-input" id="arrivalDate" name="arrivalDate" required>
-                        <span class="form-field-error form-field-error__hidden"
-                              th:text="#{bookingForm.errors.arrivalInThePast}"></span>
+                        <span id="arrival-in-the-past-error" class="form-field-error form-field-error__hidden" th:text="#{bookingForm.errors.arrivalInThePast}"></span>
+                        <span id="number-of-nights-error" class="form-field-error form-field-error__hidden" th:text="#{bookingForm.errors.numberOfNights}"></span>
                     </div>
 
                     <div class="form-field form-field_required">
                         <label for="departureDate" th:text="#{bookingForm.departureDate}"></label>
                         <input type="date" class="form-input" id="departureDate" name="departureDate" required>
-                        <span class="form-field-error form-field-error__hidden"
-                              th:text="#{bookingForm.errors.dateOrder}"></span>
+                        <span id="date-order-error" class="form-field-error form-field-error__hidden" th:text="#{bookingForm.errors.dateOrder}"></span>
                     </div>
                 </div>
 

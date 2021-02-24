@@ -9,8 +9,9 @@ const arrivalDate = document.getElementById('arrivalDate');
 const numberOfAdults = document.getElementById('numberOfAdults');
 const numberOfChildren = document.getElementById('numberOfChildren');
 const departureDate = document.getElementById('departureDate');
-const arrivalDateError = document.querySelector('#arrivalDate + .form-field-error');
-const departureDateError = document.querySelector('#departureDate + .form-field-error');
+const arrivalInThePastError = document.querySelector('#arrival-in-the-past-error');
+const dateOrderError = document.querySelector('#date-order-error');
+const numberOfNightsError = document.querySelector('#number-of-nights-error');
 const calculatedPrice = document.getElementById('calculated-price');
 const calculatedPricePerNight = document.getElementById('calculated-price-per-night');
 const submitButton = document.getElementById('submit-button');
@@ -75,8 +76,12 @@ function validateDates() {
 	if (!arrivalDate.value || !departureDate.value) return false;
 	const validArrivalDate = arrivalDate.value >= today();
 	const validDateOrder = arrivalDate.value <= departureDate.value;
-	arrivalDateError.classList.toggle('form-field-error__hidden', validArrivalDate);
-	departureDateError.classList.toggle('form-field-error__hidden', validDateOrder);
+	const from = new Date(arrivalDate.value);
+	const to = new Date(departureDate.value);
+	const numberOfNights = differenceInCalendarDays(to, from);
+	arrivalInThePastError.classList.toggle('form-field-error__hidden', validArrivalDate);
+	dateOrderError.classList.toggle('form-field-error__hidden', validDateOrder);
+	numberOfNightsError.classList.toggle('form-field-error__hidden', numberOfNights > 0);
 	return validArrivalDate && validDateOrder;
 }
 
