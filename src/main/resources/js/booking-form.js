@@ -22,6 +22,7 @@ const form = document.querySelector('form');
 
 fetchBookings();
 updatePrice();
+validate();
 
 propertySelect.addEventListener('change', () => {
 	fetchBookings();
@@ -35,17 +36,10 @@ calendarContainer.addEventListener('click', (e) => {
 	fetchBookings(`/buchungen?property=${property}&year=${year}&month=${month}`);
 });
 
-form.addEventListener('submit', (e) => {
-	if (!validateDates()) {
-		e.preventDefault();
-	}
-});
-
 form.addEventListener('change', () => {
 	updatePrice();
 	updateSecondBedroom();
-	validateNumberOfPeople();
-	validateDates();
+	validate();
 })
 
 function fetchBookings(url = `/buchungen?property=${propertySelect.value}`) {
@@ -70,14 +64,33 @@ function updateSecondBedroom() {
 	}
 }
 
+function getValidationErrors() {
+	return {...validateNumberOfPeople(), ...validateDates()};
+}
+
+function validate() {
+	const errors = getValidationErrors();
+
+	adultRequiredError.classList.toggle('form-field-error__hidden', !errors.adultRequiredError);
+	numberOfPeopleErrorApartment.classList.toggle('form-field-error__hidden', !errors.numberOfPeopleErrorApartment);
+	numberOfPeopleErrorBungalow.classList.toggle('form-field-error__hidden', !errors.numberOfPeopleErrorBungalow);
+	arrivalInThePastError.classList.toggle('form-field-error__hidden', !errors.arrivalInThePastError);
+	dateOrderError.classList.toggle('form-field-error__hidden', !errors.dateOrderError);
+	numberOfNightsError.classList.toggle('form-field-error__hidden', !errors.numberOfNightsError);
+
+	submitButton.disabled = Object.values(errors).filter(Boolean).length > 0;
+}
+
 function validateNumberOfPeople() {
 	const adults = Number(numberOfAdults.value);
 	const children = Number(numberOfChildren.value);
 	const totalPeople = adults + children;
 
-	adultRequiredError.classList.toggle('form-field-error__hidden', adults > 0);
-	numberOfPeopleErrorApartment.classList.toggle('form-field-error__hidden', !isApartmentSelected() || (totalPeople >= 1 && totalPeople <= 3));
-	numberOfPeopleErrorBungalow.classList.toggle('form-field-error__hidden', isApartmentSelected() || (totalPeople >= 2 && totalPeople <= 5));
+	return {
+		adultRequiredError: adults < 1,
+		numberOfPeopleErrorApartment: isApartmentSelected() && (totalPeople < 1 || totalPeople > 3),
+		numberOfPeopleErrorBungalow: !isApartmentSelected() && (totalPeople < 2 || totalPeople > 5),
+	}
 }
 
 function isApartmentSelected() {
@@ -85,16 +98,16 @@ function isApartmentSelected() {
 }
 
 function validateDates() {
-	if (!arrivalDate.value || !departureDate.value) return false;
-	const validArrivalDate = arrivalDate.value >= today();
-	const validDateOrder = arrivalDate.value <= departureDate.value;
+	const missingDate = !arrivalDate.value || !departureDate.value;
 	const from = new Date(arrivalDate.value);
 	const to = new Date(departureDate.value);
 	const numberOfNights = differenceInCalendarDays(to, from);
-	arrivalInThePastError.classList.toggle('form-field-error__hidden', validArrivalDate);
-	dateOrderError.classList.toggle('form-field-error__hidden', validDateOrder);
-	numberOfNightsError.classList.toggle('form-field-error__hidden', numberOfNights > 0);
-	return validArrivalDate && validDateOrder && numberOfNights > 0;
+	return {
+		arrivalInThePastError: !missingDate && arrivalDate.value < today(),
+		dateOrderError: !missingDate && arrivalDate.value > departureDate.value,
+		numberOfNightsError: !missingDate && numberOfNights < 1,
+		missingDateError: missingDate,
+	}
 }
 
 function today() {
@@ -113,19 +126,14 @@ function updatePrice() {
 	const children = Number(numberOfChildren.value);
 	const extraBedroom = secondBedroom.checked;
 	const isApartment = isApartmentSelected();
-
 	const numberOfNights = differenceInCalendarDays(to, from);
-	const people = adults + children;
 
-	const isInvalid = !validateDates() || adults < 1 || (isApartment && (people < 1 || people > 3)) || (!isApartment && (people < 2 || people > 5));
-	if (isInvalid) {
+	if (Object.values(getValidationErrors()).filter(Boolean).length > 0) {
 		calculatedPrice.innerText = '-';
 		calculatedPricePerNight.innerText = '-';
-		submitButton.disabled = true;
 	} else {
 		const price = calculatePrice(numberOfNights, adults, children, extraBedroom, isApartment);
 		calculatedPrice.innerText = price + '€';
 		calculatedPricePerNight.innerText = (price / numberOfNights) + '€';
-		submitButton.disabled = false;
 	}
 }
