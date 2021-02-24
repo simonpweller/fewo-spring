@@ -390,6 +390,7 @@ footer .linkList {
     color: #eee;
     display: inline-block;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .form-input, .button {
@@ -403,6 +404,23 @@ footer .linkList {
     border-color: #80bdff;
     box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
     outline: 0;
+}
+
+button:disabled {
+    color : #111111;
+    background-color: lightgray;
+    cursor: not-allowed;
+}
+
+.form-footer {
+    display: flex;
+    align-items: center;
+}
+
+#price-display {
+    margin-left: 10px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 #calendar-container {

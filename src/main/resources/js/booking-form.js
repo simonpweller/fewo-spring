@@ -11,10 +11,13 @@ const numberOfChildren = document.getElementById('numberOfChildren');
 const departureDate = document.getElementById('departureDate');
 const arrivalDateError = document.querySelector('#arrivalDate + .form-field-error');
 const departureDateError = document.querySelector('#departureDate + .form-field-error');
-const expectedPrice = document.getElementById('expectedPrice');
+const calculatedPrice = document.getElementById('calculated-price');
+const calculatedPricePerNight = document.getElementById('calculated-price-per-night');
+const submitButton = document.getElementById('submit-button');
 const form = document.querySelector('form');
 
-fetchBookings()
+fetchBookings();
+updatePrice();
 
 propertySelect.addEventListener('change', () => {
 	updateSecondBedroom();
@@ -97,6 +100,15 @@ function updatePrice() {
 	const numberOfNights = differenceInCalendarDays(to, from);
 	const people = adults + children;
 
-	const isInvalid = isNaN(numberOfNights) || adults < 1 || (isApartment && (people < 1 || people > 3)) || (!isApartment && (people < 2 || people > 5));
-	expectedPrice.innerText = isInvalid ? '-' : calculatePrice(numberOfNights, adults, children, extraBedroom, isApartment) + '€';
+	const isInvalid = isNaN(numberOfNights) || numberOfNights < 1 || adults < 1 || (isApartment && (people < 1 || people > 3)) || (!isApartment && (people < 2 || people > 5));
+	if (isInvalid) {
+		calculatedPrice.innerText = '-';
+		calculatedPricePerNight.innerText = '-';
+		submitButton.disabled = true;
+	} else {
+		const price = calculatePrice(numberOfNights, adults, children, extraBedroom, isApartment);
+		calculatedPrice.innerText = price + '€';
+		calculatedPricePerNight.innerText = (price / numberOfNights) + '€';
+		submitButton.disabled = false;
+	}
 }

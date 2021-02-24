@@ -122,9 +122,13 @@
                     </div>
                 </div>
 
-                <div id="expectedPrice"></div>
-                <button type="submit" class="button" th:text="#{bookingForm.submit}"></button>
-
+                <div class="form-footer">
+                    <button id="submit-button" type="submit" class="button" th:text="#{bookingForm.submit}"></button>
+                    <div id="price-display">
+                        <div><span th:text="#{calculatedPrice}"></span>:&nbsp;<span id="calculated-price">-</span>&nbsp;</div>
+                        <div>(<span id="calculated-price-per-night">-</span>&nbsp;<span th:text="#{perNight}"></span>)</div>
+                    </div>
+                </div>
             </form>
         </div>
     </main>
