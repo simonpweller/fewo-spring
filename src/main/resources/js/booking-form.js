@@ -12,6 +12,9 @@ const departureDate = document.getElementById('departureDate');
 const arrivalInThePastError = document.querySelector('#arrival-in-the-past-error');
 const dateOrderError = document.querySelector('#date-order-error');
 const numberOfNightsError = document.querySelector('#number-of-nights-error');
+const adultRequiredError = document.querySelector('#adult-required-error');
+const numberOfPeopleErrorApartment = document.querySelector('#number-of-people-error-apartment');
+const numberOfPeopleErrorBungalow = document.querySelector('#number-of-people-error-bungalow');
 const calculatedPrice = document.getElementById('calculated-price');
 const calculatedPricePerNight = document.getElementById('calculated-price-per-night');
 const submitButton = document.getElementById('submit-button');
@@ -21,12 +24,8 @@ fetchBookings();
 updatePrice();
 
 propertySelect.addEventListener('change', () => {
-	updateSecondBedroom();
 	fetchBookings();
 });
-
-numberOfAdults.addEventListener('change', updateSecondBedroom);
-numberOfChildren.addEventListener('change', updateSecondBedroom);
 
 calendarContainer.addEventListener('click', (e) => {
 	if (!e.target.classList.contains('calendar-control')) return;
@@ -36,15 +35,18 @@ calendarContainer.addEventListener('click', (e) => {
 	fetchBookings(`/buchungen?property=${property}&year=${year}&month=${month}`);
 });
 
-departureDate.addEventListener('change', validateDates)
-arrivalDate.addEventListener('change', validateDates)
 form.addEventListener('submit', (e) => {
 	if (!validateDates()) {
 		e.preventDefault();
 	}
 });
 
-form.addEventListener('change', updatePrice)
+form.addEventListener('change', () => {
+	updatePrice();
+	updateSecondBedroom();
+	validateNumberOfPeople();
+	validateDates();
+})
 
 function fetchBookings(url = `/buchungen?property=${propertySelect.value}`) {
 	fetch(url)
@@ -68,6 +70,16 @@ function updateSecondBedroom() {
 	}
 }
 
+function validateNumberOfPeople() {
+	const adults = Number(numberOfAdults.value);
+	const children = Number(numberOfChildren.value);
+	const totalPeople = adults + children;
+
+	adultRequiredError.classList.toggle('form-field-error__hidden', adults > 0);
+	numberOfPeopleErrorApartment.classList.toggle('form-field-error__hidden', !isApartmentSelected() || (totalPeople >= 1 && totalPeople <= 3));
+	numberOfPeopleErrorBungalow.classList.toggle('form-field-error__hidden', isApartmentSelected() || (totalPeople >= 2 && totalPeople <= 5));
+}
+
 function isApartmentSelected() {
 	return propertySelect.value === 'APARTMENT';
 }
@@ -82,7 +94,7 @@ function validateDates() {
 	arrivalInThePastError.classList.toggle('form-field-error__hidden', validArrivalDate);
 	dateOrderError.classList.toggle('form-field-error__hidden', validDateOrder);
 	numberOfNightsError.classList.toggle('form-field-error__hidden', numberOfNights > 0);
-	return validArrivalDate && validDateOrder;
+	return validArrivalDate && validDateOrder && numberOfNights > 0;
 }
 
 function today() {
@@ -105,7 +117,7 @@ function updatePrice() {
 	const numberOfNights = differenceInCalendarDays(to, from);
 	const people = adults + children;
 
-	const isInvalid = isNaN(numberOfNights) || numberOfNights < 1 || adults < 1 || (isApartment && (people < 1 || people > 3)) || (!isApartment && (people < 2 || people > 5));
+	const isInvalid = !validateDates() || adults < 1 || (isApartment && (people < 1 || people > 3)) || (!isApartment && (people < 2 || people > 5));
 	if (isInvalid) {
 		calculatedPrice.innerText = '-';
 		calculatedPricePerNight.innerText = '-';

@@ -414,11 +414,15 @@ button:disabled {
 
 .form-footer {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
 }
 
+#submit-button {
+    margin-right: 10px;
+}
+
 #price-display {
-    margin-left: 10px;
     display: flex;
     flex-wrap: wrap;
 }
