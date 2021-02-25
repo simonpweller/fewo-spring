@@ -19,7 +19,7 @@
             <p>
                 <span th:text="#{bookingRequest.thankYou}"></span>
                 <span th:text="${isBungalow} ? #{ourBungalow} : #{ourApartment}"></span>
-                <span th:text="#{datesOfStay(${arrivalDate}, ${departureDate})}"></span>
+                <span th:text="#{datesOfStay(${arrivalDate}, ${departureDate})} + '.'"></span>
             </p>
 
             <p th:text="#{bookingRequest.nextSteps}"></p>

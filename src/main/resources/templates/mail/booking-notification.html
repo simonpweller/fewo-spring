@@ -18,5 +18,6 @@
     <p><strong th:text="#{bookingForm.email}"></strong>: <a th:href="|mailto:${booking.email}|" th:text="${booking.email}"></a></p>
     <p><strong th:text="#{bookingForm.phoneNumber}"></strong>: <span th:text="${booking.phoneNumber}"></span></p>
     <p><strong th:text="#{bookingForm.comments}"></strong>: <span th:text="${booking.comments}"></span></p>
+    <p><strong th:text="#{calculatedPrice}"></strong>: <span th:text="|${totalPrice}€ / ${pricePerNight} #{perNight}|"></span></p>
 </body>
 </html>

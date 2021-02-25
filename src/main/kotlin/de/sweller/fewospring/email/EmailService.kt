@@ -2,9 +2,9 @@ package de.sweller.fewospring.email
 
 import de.sweller.fewospring.booking.Booking
 import de.sweller.fewospring.booking.Property
+import de.sweller.fewospring.booking.calculatePrice
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.MessageSource
-import org.springframework.context.i18n.LocaleContextHolder
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper
 import org.springframework.stereotype.Service
@@ -40,6 +40,7 @@ class EmailService(
     }
 
     fun sendRequestNotificationMail(booking: Booking) {
+        val calculatedPrice = calculatePrice(booking)
         sendTemplatedMessage(
             to = adminMail,
             locale = Locale.GERMAN,
@@ -48,12 +49,15 @@ class EmailService(
             templateModel = mapOf(
                 "isBungalow" to (booking.property == Property.BUNGALOW),
                 "hasFullAddress" to (booking.streetLine.isNotBlank() && (booking.city.isNotBlank() || booking.zipCode.isNotBlank())),
-                "booking" to booking
+                "booking" to booking,
+                "totalPrice" to calculatedPrice.totalPrice,
+                "pricePerNight" to calculatedPrice.pricePerNight,
             ),
         )
     }
 
     fun sendConfirmationMail(booking: Booking) {
+        val calculatedPrice = calculatePrice(booking)
         val dateTimeFormatter =
             DateTimeFormatter.ofPattern(if (booking.locale == Locale.ENGLISH) "dd/MM/yyyy" else "dd.MM.yyyy")
         sendTemplatedMessage(
@@ -65,7 +69,9 @@ class EmailService(
                 "isBungalow" to (booking.property == Property.BUNGALOW),
                 "arrivalDate" to booking.arrivalDate.format(dateTimeFormatter),
                 "departureDate" to booking.departureDate.format(dateTimeFormatter),
-            )
+                "totalPrice" to calculatedPrice.totalPrice,
+                "pricePerNight" to calculatedPrice.pricePerNight,
+                )
         )
     }
 

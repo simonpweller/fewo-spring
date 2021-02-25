@@ -1,6 +1,15 @@
 package de.sweller.fewospring.booking
 
+import java.time.temporal.ChronoUnit
 import kotlin.math.max
+
+fun calculatePrice(booking: Booking): CalculatedPrice {
+    val numberOfNights = ChronoUnit.DAYS.between(booking.arrivalDate, booking.departureDate).toInt()
+    val totalPrice = calculatePrice(numberOfNights, booking.numberOfAdults, booking.numberOfChildren, booking.secondBedroom, booking.property)
+    return CalculatedPrice(totalPrice, totalPrice / numberOfNights)
+}
+
+class CalculatedPrice(val totalPrice: Int, val pricePerNight: Int)
 
 fun calculatePrice(numberOfNights: Int, adults: Int, children: Int, extraBedroom: Boolean, property: Property): Int {
     val people = adults + children

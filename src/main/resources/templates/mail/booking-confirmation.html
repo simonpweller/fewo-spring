@@ -12,6 +12,7 @@
         <span th:text="#{bookingConfirmation.confirmation}"></span>
         <span th:text="${isBungalow} ? #{ourBungalow} : #{ourApartment}"></span>
         <span th:text="#{datesOfStay(${arrivalDate}, ${departureDate})}"></span>
+        <span th:text="| #{atThePriceOf} ${totalPrice}€ (${pricePerNight}€ #{perNight}).|"></span>
     </p>
 
     <p th:text="#{bookingConfirmation.nextSteps}"></p>
