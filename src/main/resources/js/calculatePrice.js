@@ -16,8 +16,7 @@ function getPricePerNight(numberOfNights, adults, children, isApartment, extraBe
 }
 
 function getEffectiveNights(numberOfNights, people) {
-	if (people === 1) return Math.max(numberOfNights, 3);
-	return Math.max(numberOfNights, 2);
+	return people === 1 ? Math.max(numberOfNights, 3) : Math.max(numberOfNights, 2);
 }
 
 function getBaseChargePerNight(numberOfNights, people, isApartment) {
