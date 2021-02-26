@@ -63,7 +63,7 @@
                 <div class="form-row">
                     <div class="form-field form-field_required">
                         <label for="numberOfAdults" th:text="#{bookingForm.numberOfAdults}"></label>
-                        <input type="number" class="form-input" step="1" min="1" max="5" id="numberOfAdults" name="numberOfAdults" th:value="1" required>
+                        <input type="number" class="form-input" step="1" min="1" max="5" id="numberOfAdults" name="numberOfAdults" th:value="0" required>
                         <span id="adult-required-error" class="form-field-error form-field-error__hidden" th:text="#{bookingForm.errors.adultRequired}"></span>
                         <span id="number-of-people-error-apartment" class="form-field-error form-field-error__hidden" th:text="#{bookingForm.errors.numberOfPeople.apartment}"></span>
                         <span id="number-of-people-error-bungalow" class="form-field-error form-field-error__hidden" th:text="#{bookingForm.errors.numberOfPeople.bungalow}"></span>

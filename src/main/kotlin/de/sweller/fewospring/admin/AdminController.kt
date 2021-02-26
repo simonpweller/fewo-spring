@@ -17,7 +17,7 @@ class AdminController(
 
     @GetMapping
     fun getBookings(model: Model): String {
-        model.addAttribute("bookings", bookingService.getBookings())
+        model.addAttribute("bookings", bookingService.getBookings().sortedBy { it.arrivalDate })
         return "admin"
     }
 
