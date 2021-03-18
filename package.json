@@ -4,6 +4,7 @@
   "description": "...",
   "main": "index.js",
   "scripts": {
+    "start": "parcel watch --public-url ./ -d src/main/resources/static/dist src/main/resources/js/booking-form.js",
     "build": "parcel build --public-url ./ -d src/main/resources/static/dist src/main/resources/js/booking-form.js",
     "test": "jest --watch"
   },
