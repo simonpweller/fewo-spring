@@ -2,9 +2,18 @@ import {calculatePrice} from './calculatePrice'
 
 describe(`calculatePrice`, () => {
 	describe(`apartment`, () => {
-		it(`should use a base price of 25€ per night for 1 person`, () => {
-			expect(calculatePrice(3, 1, 0, false, true)).toBe(75);
-			expect(calculatePrice(4, 1, 0, false, true)).toBe(100);
+		it(`should use a base price of 35€ per night for 1 person`, () => {
+			expect(calculatePrice(3, 1, 0, false, true)).toBe(105);
+			expect(calculatePrice(4, 1, 0, false, true)).toBe(140);
+		});
+
+		it(`should use a base price of 25€ per night for 1 person staying 5 nights or more`, () => {
+			expect(calculatePrice(5, 1, 0, false, true)).toBe(125);
+			expect(calculatePrice(6, 1, 0, false, true)).toBe(150);
+		});
+
+		it(`should use a base price of 40€ per night for 1 person staying 5 nights only`, () => {
+			expect(calculatePrice(2, 1, 0, false, true)).toBe(80);
 		});
 
 		it(`should use a base price of 50€ per night for 2 people`, () => {
@@ -32,8 +41,7 @@ describe(`calculatePrice`, () => {
 		});
 
 		it(`should correctly enforce the minimum number of nights`, () => {
-			expect(calculatePrice(1, 1, 0, false, true)).toBe(75);
-			expect(calculatePrice(2, 1, 0, false, true)).toBe(75);
+			expect(calculatePrice(1, 1, 0, false, true)).toBe(80);
 
 			expect(calculatePrice(1, 2, 0, false, true)).toBe(100);
 			expect(calculatePrice(1, 1, 1, false, true)).toBe(100);

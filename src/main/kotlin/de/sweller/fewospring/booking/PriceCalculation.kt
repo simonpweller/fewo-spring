@@ -5,20 +5,31 @@ import kotlin.math.max
 
 fun calculatePrice(booking: Booking): CalculatedPrice {
     val numberOfNights = ChronoUnit.DAYS.between(booking.arrivalDate, booking.departureDate).toInt()
-    val totalPrice = calculatePrice(numberOfNights, booking.numberOfAdults, booking.numberOfChildren, booking.secondBedroom, booking.property)
+    val totalPrice = calculatePrice(
+        numberOfNights,
+        booking.numberOfAdults,
+        booking.numberOfChildren,
+        booking.secondBedroom,
+        booking.property
+    )
     return CalculatedPrice(totalPrice, totalPrice / numberOfNights)
 }
 
 class CalculatedPrice(val totalPrice: Int, val pricePerNight: Int)
 
 fun calculatePrice(numberOfNights: Int, adults: Int, children: Int, extraBedroom: Boolean, property: Property): Int {
-    val people = adults + children
-    val effectiveNights = getEffectiveNights(numberOfNights, people)
+    val effectiveNights = max(numberOfNights, 2)
     val pricePerNight = getPricePerNight(numberOfNights, adults, children, property, extraBedroom)
     return effectiveNights * pricePerNight;
 }
 
-private fun getPricePerNight(numberOfNights: Int, adults: Int, children: Int, property: Property, extraBedroom: Boolean): Int {
+private fun getPricePerNight(
+    numberOfNights: Int,
+    adults: Int,
+    children: Int,
+    property: Property,
+    extraBedroom: Boolean
+): Int {
     val people = adults + children;
     val baseChargePerNight = getBaseChargePerNight(numberOfNights, people, property)
     val additionalAdults = max(adults - 2, 0)
@@ -29,12 +40,18 @@ private fun getPricePerNight(numberOfNights: Int, adults: Int, children: Int, pr
 }
 
 private fun getBaseChargePerNight(numberOfNights: Int, people: Int, property: Property): Int {
-    if (people == 1) return 25
+    if (people == 1) return getSinglePersonChargePerNight(numberOfNights)
     return when (property) {
         Property.APARTMENT -> if (numberOfNights > 2) 40 else 50
         Property.BUNGALOW -> if (numberOfNights > 2) 50 else 60
     }
 }
 
-private fun getEffectiveNights(numberOfNights: Int, people: Int): Int =
-    if (people == 1) max(numberOfNights, 3) else max(numberOfNights, 2)
+private fun getSinglePersonChargePerNight(numberOfNights: Int): Int =
+    when (numberOfNights) {
+        1 -> 40
+        2 -> 40
+        3 -> 35
+        4 -> 35
+        else -> 25
+    }

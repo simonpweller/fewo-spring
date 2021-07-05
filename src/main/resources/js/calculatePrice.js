@@ -1,6 +1,5 @@
 export function calculatePrice(numberOfNights, adults, children, extraBedroom, isApartment) {
-	const people = adults + children;
-	const effectiveNights = getEffectiveNights(numberOfNights, people);
+	const effectiveNights = Math.max(numberOfNights, 2);
 	const pricePerNight = getPricePerNight(numberOfNights, adults, children, isApartment, extraBedroom);
 	return effectiveNights * pricePerNight;
 }
@@ -15,15 +14,21 @@ function getPricePerNight(numberOfNights, adults, children, isApartment, extraBe
 	return baseChargePerNight + (additionalAdults * chargePerAdditionalAdult) + (additionalChildren * 5) + extraBedroomCharge;
 }
 
-function getEffectiveNights(numberOfNights, people) {
-	return people === 1 ? Math.max(numberOfNights, 3) : Math.max(numberOfNights, 2);
-}
-
 function getBaseChargePerNight(numberOfNights, people, isApartment) {
-	if (people === 1) return 25;
+	if (people === 1) return getSinglePersonChargePerNight(numberOfNights);
 	if (isApartment) {
 		return numberOfNights > 2 ? 40 : 50;
 	} else {
 		return numberOfNights > 2 ? 50 : 60;
+	}
+}
+
+function getSinglePersonChargePerNight(numberOfNights) {
+	switch (numberOfNights) {
+		case 1: return 40;
+		case 2: return 40;
+		case 3: return 35;
+		case 4: return 35;
+		default: return 25;
 	}
 }

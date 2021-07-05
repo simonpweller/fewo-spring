@@ -15,9 +15,20 @@ internal class PriceCalculationTest {
     inner class Apartment {
 
         @Test
-        fun `should use a base price of 25 EUR per night for 1 person`() {
-            assertEquals(75, calculatePrice(3, 1, 0, false, APARTMENT))
-            assertEquals(100, calculatePrice(4, 1, 0, false, APARTMENT))
+        fun `should use a base price of 35 EUR per night for 1 person`() {
+            assertEquals(105, calculatePrice(3, 1, 0, false, APARTMENT))
+            assertEquals(140, calculatePrice(4, 1, 0, false, APARTMENT))
+        }
+
+        @Test
+        fun `should use a base price of 25 EUR per night for 1 person, staying 5 nights or more`() {
+            assertEquals(125, calculatePrice(5, 1, 0, false, APARTMENT))
+            assertEquals(150, calculatePrice(6, 1, 0, false, APARTMENT))
+        }
+
+        @Test
+        fun `should use a base price of 40 EUR per night for 1 person, staying 2 nights only`() {
+            assertEquals(80, calculatePrice(2, 1, 0, false, APARTMENT))
         }
 
         @Test
@@ -51,8 +62,7 @@ internal class PriceCalculationTest {
 
         @Test
         fun `should correctly enforce the minimum number of nights`() {
-            assertEquals(75, calculatePrice(1, 1, 0, false, APARTMENT))
-            assertEquals(75, calculatePrice(2, 1, 0, false, APARTMENT))
+            assertEquals(80, calculatePrice(1, 1, 0, false, APARTMENT))
 
             assertEquals(100, calculatePrice(1, 2, 0, false, APARTMENT))
             assertEquals(100, calculatePrice(1, 1, 1, false, APARTMENT))
