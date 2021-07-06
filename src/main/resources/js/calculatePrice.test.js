@@ -2,9 +2,9 @@ import {calculatePrice} from './calculatePrice'
 
 describe(`calculatePrice`, () => {
 	describe(`apartment`, () => {
-		it(`should use a base price of 35€ per night for 1 person`, () => {
-			expect(calculatePrice(3, 1, 0, false, true)).toBe(105);
-			expect(calculatePrice(4, 1, 0, false, true)).toBe(140);
+		it(`should use a base price of 30€ per night for 1 person`, () => {
+			expect(calculatePrice(3, 1, 0, false, true)).toBe(90);
+			expect(calculatePrice(4, 1, 0, false, true)).toBe(120);
 		});
 
 		it(`should use a base price of 25€ per night for 1 person staying 5 nights or more`, () => {

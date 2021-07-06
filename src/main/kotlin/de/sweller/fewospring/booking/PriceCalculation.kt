@@ -20,7 +20,7 @@ class CalculatedPrice(val totalPrice: Int, val pricePerNight: Int)
 fun calculatePrice(numberOfNights: Int, adults: Int, children: Int, extraBedroom: Boolean, property: Property): Int {
     val effectiveNights = max(numberOfNights, 2)
     val pricePerNight = getPricePerNight(numberOfNights, adults, children, property, extraBedroom)
-    return effectiveNights * pricePerNight;
+    return effectiveNights * pricePerNight
 }
 
 private fun getPricePerNight(
@@ -30,7 +30,7 @@ private fun getPricePerNight(
     property: Property,
     extraBedroom: Boolean
 ): Int {
-    val people = adults + children;
+    val people = adults + children
     val baseChargePerNight = getBaseChargePerNight(numberOfNights, people, property)
     val additionalAdults = max(adults - 2, 0)
     val additionalChildren = if (adults == 1) max(children - 1, 0) else children
@@ -51,7 +51,7 @@ private fun getSinglePersonChargePerNight(numberOfNights: Int): Int =
     when (numberOfNights) {
         1 -> 40
         2 -> 40
-        3 -> 35
-        4 -> 35
+        3 -> 30
+        4 -> 30
         else -> 25
     }

@@ -15,9 +15,9 @@ internal class PriceCalculationTest {
     inner class Apartment {
 
         @Test
-        fun `should use a base price of 35 EUR per night for 1 person`() {
-            assertEquals(105, calculatePrice(3, 1, 0, false, APARTMENT))
-            assertEquals(140, calculatePrice(4, 1, 0, false, APARTMENT))
+        fun `should use a base price of 30 EUR per night for 1 person`() {
+            assertEquals(90, calculatePrice(3, 1, 0, false, APARTMENT))
+            assertEquals(120, calculatePrice(4, 1, 0, false, APARTMENT))
         }
 
         @Test
