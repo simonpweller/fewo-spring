@@ -38,7 +38,7 @@
                     <li>
                         <a th:class="'link' + ${#httpServletRequest.getRequestURI() == '/buchen' ? ' link_active' : ''}"
                            href="/buchen"
-                           th:text="#{bookingForm}"
+                           th:text="#{availability} + ' / ' +  #{bookingForm}"
                         ></a>
                     </li>
                     <li>
