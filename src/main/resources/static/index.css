@@ -428,7 +428,6 @@ button:disabled {
 }
 
 #calendar-container {
-    height: 334px;
     display: flex;
 }
 
