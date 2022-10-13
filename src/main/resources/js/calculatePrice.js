@@ -17,18 +17,18 @@ function getPricePerNight(numberOfNights, adults, children, isApartment, extraBe
 function getBaseChargePerNight(numberOfNights, people, isApartment) {
 	if (people === 1) return getSinglePersonChargePerNight(numberOfNights);
 	if (isApartment) {
-		return numberOfNights > 2 ? 40 : 50;
+		return numberOfNights > 2 ? 45 : 55;
 	} else {
-		return numberOfNights > 2 ? 50 : 60;
+		return numberOfNights > 2 ? 55 : 65;
 	}
 }
 
 function getSinglePersonChargePerNight(numberOfNights) {
 	switch (numberOfNights) {
-		case 1: return 40;
-		case 2: return 40;
-		case 3: return 30;
-		case 4: return 30;
-		default: return 25;
+		case 1: return 45;
+		case 2: return 45;
+		case 3: return 35;
+		case 4: return 35;
+		default: return 30;
 	}
 }

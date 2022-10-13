@@ -42,16 +42,16 @@ private fun getPricePerNight(
 private fun getBaseChargePerNight(numberOfNights: Int, people: Int, property: Property): Int {
     if (people == 1) return getSinglePersonChargePerNight(numberOfNights)
     return when (property) {
-        Property.APARTMENT -> if (numberOfNights > 2) 40 else 50
-        Property.BUNGALOW -> if (numberOfNights > 2) 50 else 60
+        Property.APARTMENT -> if (numberOfNights > 2) 45 else 55
+        Property.BUNGALOW -> if (numberOfNights > 2) 55 else 65
     }
 }
 
 private fun getSinglePersonChargePerNight(numberOfNights: Int): Int =
     when (numberOfNights) {
-        1 -> 40
-        2 -> 40
-        3 -> 30
-        4 -> 30
-        else -> 25
+        1 -> 45
+        2 -> 45
+        3 -> 35
+        4 -> 35
+        else -> 30
     }
