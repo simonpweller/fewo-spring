@@ -34,24 +34,24 @@ private fun getPricePerNight(
     val baseChargePerNight = getBaseChargePerNight(numberOfNights, people, property)
     val additionalAdults = max(adults - 2, 0)
     val additionalChildren = if (adults == 1) max(children - 1, 0) else children
-    val chargePerAdditionalAdult = if (property == Property.APARTMENT) 10 else 15
-    val extraBedroomCharge = if (extraBedroom && people <= 3) 10 else 0
-    return baseChargePerNight + (additionalAdults * chargePerAdditionalAdult) + (additionalChildren * 5) + extraBedroomCharge
+    val chargePerAdditionalAdult = 15
+    val extraBedroomCharge = if (extraBedroom && people <= 3) 15 else 0
+    return baseChargePerNight + (additionalAdults * chargePerAdditionalAdult) + (additionalChildren * 8) + extraBedroomCharge
 }
 
 private fun getBaseChargePerNight(numberOfNights: Int, people: Int, property: Property): Int {
     if (people == 1) return getSinglePersonChargePerNight(numberOfNights)
     return when (property) {
-        Property.APARTMENT -> if (numberOfNights > 2) 45 else 55
-        Property.BUNGALOW -> if (numberOfNights > 2) 55 else 65
+        Property.APARTMENT -> if (numberOfNights > 2) 55 else 65
+        Property.BUNGALOW -> if (numberOfNights > 2) 65 else 75
     }
 }
 
 private fun getSinglePersonChargePerNight(numberOfNights: Int): Int =
     when (numberOfNights) {
-        1 -> 45
-        2 -> 45
-        3 -> 35
-        4 -> 35
-        else -> 30
+        1 -> 55
+        2 -> 55
+        3 -> 45
+        4 -> 45
+        else -> 40
     }
